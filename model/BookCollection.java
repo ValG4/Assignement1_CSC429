@@ -20,60 +20,71 @@ public class BookCollection extends EntityBase implements IView
 
     public BookCollection() {
         super(myTableName); //saw this in account collection, looked important
-        bookList = new Vector(); //constructor
+        bookList = new Vector<Book>(); //constructor
     }
 
     public Vector<Book> findBooksOlderThanDate(String year) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + Book + " WHERE (pubYear < ? " + year +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear < ? " + year +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
-        if (allDataRetrieved != null) //iterting through result of table query to add to new vector
+        if (allDataRetrieved != null) //iterting through result of table query to add to new vector (making sure its not empty)
         {
-            Vector<Book> OlderBooks = new Vector<Book>(); //create vector of books to return result
-
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
                 Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
-
-                OlderBooks.add(new Book(nextBook));//update new booklist
+                bookList.add(new Book(nextBook));//update new booklist
             }
         }
-        return OlderBooks;
+        return bookList;
     }
-
-
-
-
 
     public Vector<Book> findBooksNewerThanDate(String year) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + Book + " WHERE (pubYear > ? " + year +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear > ? " + year +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
         {
-            Vector<Book> NewerBooks = new Vector<Book>(); //create vector of books to return result
-
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
                 Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
-
-                NewerBooks.add(new Book(nextBook));//update new booklist
+                bookList.add(new Book(nextBook));//update new booklist
             }
         }
-        return NewerBooks;
+        return bookList;
     }
 
 
 
     public findBooksWithTitleLike(String title) {
         // SQL Implementation here
-        return null;
+        String query = "SELECT * FROM " + myTableName + " WHERE bookTitle LIKE '%" + title + "%'"; //sql query to find book titles similar to given string
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null) //iterting through result of table query to add to new vector
+        {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+            {
+                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                bookList.add(new Book(nextBook));//update booklist
+            }
+        }
+        return bookList;
     }
 
     public findBooksWithAuthorLike(String author) {
         // SQL Implementation here
-        return null;
-    }
+        String query = "SELECT * FROM " + myTableName + " WHERE author LIKE '%" + author + "%'"; //sql query to find books written by same author
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null) //iterting through result of table query to add to new vector
+        {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+            {
+                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                bookList.add(new Book(nextBook));//update booklist
+            }
+        }
+        return bookList;
 }

@@ -20,61 +20,74 @@ public class PatronCollection extends EntityBase implements IView
 
     public PatronCollection() {
         super(myTableName); //saw this in account collection, looked important
-        bookList = new Vector(); //constructor
+        patronList = new Vector<Patron>(); //constructor
     }
 
 
     public Vector<Patron> findPatronsOlderThanDate(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + Patron + " WHERE (dateOfBirth < ? " + date +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < ? " + date +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
         {
-            Vector<Patron> OlderPatrons = new Vector<Book>(); //create vector of books to return result
-
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
-                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
 
-                OlderBooks.add(new Book(nextBook));//update new booklist
-
-
+                patronList.add(new Patron(nextPatron));//update new booklist
             }
         }
-        return OlderBooks;
+        return patronList;
     }
 
 
     public Vector<Patron> findPatronsYoungerThan(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + Book + " WHERE (pubYear > ? " + year +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > ? " + date +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
         {
-            Vector<Book> NewerBooks = new Vector<Book>(); //create vector of books to return result
-
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
-                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
-
-                NewerBooks.add(new Book(nextBook));//update new booklist
-
+                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                patronList.add(new Patron(nextPatron));//update new booklist
             }
         }
-        return NewerBooks;
+        return patronList;
     }
-
 
 
     public Vector<Patron> findPatronsAtZipCode(String zip){
         // SQL Implementation here
-        return null;
+        String query = ("SELECT * FROM " + myTableName + " WHERE (zip > ? " + zip +")"; //query to find the books older than given date
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null) //iterting through result of table query to add to new vector
+        {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+            {
+                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                patronList.add(new Patron(nextPatron));//update new booklist
+            }
+        }
+        return patronList;
     }
 
     public Vector<Patron> findPatronsWithNameLike(String name){
         // SQL Implementation here
-        return null;
+        String query = "SELECT * FROM " + myTableName + " WHERE name LIKE '%" + name + "%'"; //sql query to find books written by same author
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        if (allDataRetrieved != null) //iterting through result of table query to add to new vector
+        {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
+            {
+                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                patronList.add(new Book(nextBook));//update booklist
+            }
+        }
+        return patronList;
     }
 }
