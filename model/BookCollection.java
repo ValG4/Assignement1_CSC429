@@ -36,44 +36,39 @@ public class BookCollection extends EntityBase implements IView
             {
                 Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
 
-                Book books = new Book(nextBook);
+                OlderBooks.add(new Book(nextBook));//update new booklist
 
-                if (account != null)
-                {
-                    addAccount(account);
-                }
+
             }
         }
-        return null;
+        return OlderBooks;
     }
 
 
 
 
 
-    public Vector<Book> findBooksOlderThanDate(String year) {
+    public Vector<Book> findBooksNewerThanDate(String year) {
         // SQL Implementation here
         String query = ("SELECT * FROM " + Book + " WHERE (pubYear > ? " + year +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
         {
-            Vector<Book> OlderBooks = new Vector<Book>(); //create vector of books to return result
+            Vector<Book> NewerBooks = new Vector<Book>(); //create vector of books to return result
 
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
                 Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
 
-                Book books = new Book(nextBook);
+                NewerBooks.add(new Book(nextBook));//update new booklist
 
-                if (account != null)
-                {
-                    addAccount(account);
-                }
             }
         }
-        return null;
+        return NewerBooks;
     }
+
+
 
     public findBooksWithTitleLike(String title) {
         // SQL Implementation here
