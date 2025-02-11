@@ -26,7 +26,7 @@ public class PatronCollection extends EntityBase implements IView
 
     public Vector<Patron> findPatronsOlderThanDate(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < ? " + date +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -44,7 +44,7 @@ public class PatronCollection extends EntityBase implements IView
 
     public Vector<Patron> findPatronsYoungerThan(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > ? " + date +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -61,7 +61,7 @@ public class PatronCollection extends EntityBase implements IView
 
     public Vector<Patron> findPatronsAtZipCode(String zip){
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (zip > ? " + zip +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector

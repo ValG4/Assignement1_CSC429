@@ -10,10 +10,9 @@ public class Patron {
 
 
 
-    public Patron (Properties props) throws InvalidPrimaryKeyException, PasswordMismatchException{
+    public Patron (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException{
         super(table_name);
 
-        String query_Id = props.getProperty("ID");
         String query = "SELECT * FROM" + patron + " WHERE (ID= " + query_Id + ")";
 
         Vector dataRetrieved = getSelectQueryResult(query);

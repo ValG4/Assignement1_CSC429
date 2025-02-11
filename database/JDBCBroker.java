@@ -46,7 +46,7 @@ public class JDBCBroker
 	private String dbName = "spr25_csc429_vgoye1";
 	private String username = "vgoye1";
 	private String password = "_spr25_9";
-    private String server = "https://csdb.brockport.edu/index.php?route=/&db=spr25_csc429_vgoye1";
+    private String server = "csdb.brockport.edu";
 	
 	private String dbClassNameVal = null;
 	private String dbInstallationNameVal = null;
