@@ -25,7 +25,7 @@ public class BookCollection extends EntityBase implements IView
 
     public Vector<Book> findBooksOlderThanDate(String year) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear < ? " + year +")"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear < " + year +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector (making sure its not empty)
@@ -39,9 +39,9 @@ public class BookCollection extends EntityBase implements IView
         return bookList;
     }
 
-    public Vector<Book> findBooksNewerThanDate(String year) {
-        // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear > ? " + year +")"; //query to find the books older than given date
+    public Vector<Book> findBooksNewerThanDate(int year) {
+        // SQL Implementation here                                          IF THE COLUMN/DATABASE USES A VARCHAR, we need single quotes ' instead of " (see photo from class)
+        String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear > " + year +")"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -55,7 +55,7 @@ public class BookCollection extends EntityBase implements IView
         return bookList;
     }
 
-
+ //CONFIGURE DBCONFIG.INI HAS THE RIGHT INFORMATION IN IT (IN INSTALL DIRECTORY OF INTELLIJ OR PROJECT)
 
     public findBooksWithTitleLike(String title) {
         // SQL Implementation here
