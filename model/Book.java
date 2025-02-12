@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.sql.*;
+import database.*;
 
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
@@ -15,7 +16,7 @@ public abstract class Book extends EntityBase{
     private String updateStatusMessage = "";
 
     public Book (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
-        super();
+        super(table_name);
 
         String query = "SELECT * FROM" + table_name + " WHERE (ID= " + query_id + ")";
 
@@ -25,7 +26,7 @@ public abstract class Book extends EntityBase{
             int size = dataRetrieved.size();
 
             if (size !=1){
-                throw new InvalidPrimaryKeyException();
+                throw new InvalidPrimaryKeyException("More than one entry with that primary key");
             }else{
                 Properties retrievedBookData = (Properties)dataRetrieved.elementAt(0);
                 persistentState = new Properties();

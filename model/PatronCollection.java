@@ -12,7 +12,7 @@ import impresario.IView;
 //import userinterface.ViewFactory;
 
 
-public class PatronCollection
+public abstract class PatronCollection extends EntityBase
 {
     private static final String myTableName = "Patron"; //establish database table name
 

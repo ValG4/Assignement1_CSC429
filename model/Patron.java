@@ -10,7 +10,7 @@ import database.*;
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
 
-public class Patron {
+public abstract class Patron extends EntityBase{
     private static String table_name = "Patron";
 
 
