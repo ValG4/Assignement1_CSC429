@@ -38,7 +38,7 @@ public class Patron {
                 }
             }
         }else{
-            throw new InvalidPrimaryKeyException();
+            throw new InvalidPrimaryKeyException("More than one value associated with that key");
         }
 
     }

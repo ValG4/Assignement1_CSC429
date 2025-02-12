@@ -36,7 +36,7 @@ public class Book {
                 }
             }
         }else{
-            throw new InvalidPrimaryKeyException();
+            throw new InvalidPrimaryKeyException("More than one value associated with that key");
         }
 
     }

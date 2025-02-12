@@ -60,7 +60,7 @@ public class PatronCollection extends EntityBase implements IView
 
 
     public Vector<Patron> findPatronsAtZipCode(String zip){
-        // SQL Implementation here
+
         String query = ("SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
