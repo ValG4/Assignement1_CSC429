@@ -5,13 +5,14 @@ import java.util.Vector;
 import java.util.Enumeration;
 import java.sql.*;
 
-import database.Persistable;
-import database.*;
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
 
-public class Book {
+public abstract class Book extends EntityBase{
     private static String table_name = "Book";
+
+    protected Properties dependencies;
+    private String updateStatusMessage = "";
 
     public Book (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
         super();
@@ -35,7 +36,7 @@ public class Book {
                     String nextValue = retrievedBookData.getProperty(nextKey);
 
                     if(nextValue != null){
-                        persistentState.setProperty(nextKey, NextValue);
+                        persistentState.setProperty(nextKey, nextValue);
 
                     }
                 }
@@ -44,5 +45,94 @@ public class Book {
             throw new InvalidPrimaryKeyException("More than one value associated with that key");
         }
 
+        public Book(Properties props){
+            super(table_name);
+
+            setDependencies();
+
+            persistentState = new Properties();
+            Enumeration allKeys = props.propertyNames();
+            while (allKeys.hasMoreElements() == true){
+                String nextKey = (String)allKeys.nextElement();
+                String nextValue = props.getProperty(nextKey);
+
+                if(nextValue != null){
+                    persistentState.setProperty(nextKey, nextValue);
+                }
+            }
+        }
+
+        private void setDependencies(){
+            dependencies = new Properties();
+            myRegistry.setDependencies(dependencies);
+        }
+
+        public Object getState(String key){
+            if (key.equals("UpdateStatusMessage") == true)
+                return updateStatusMessage;
+
+            return persistentState.getProperty(key);
+        }
+
+        public void stateChangeRequest(String key, Object value)
+        {
+
+            myRegistry.updateSubscribers(key, this);
+        }
+
+
+        public boolean verifyOwnership(PatronCollection Patron)
+        {
+            if (Patron == null)
+            {
+                return false;
+            }
+            else
+            {
+                String PatronID = (String)Patron.getState("ID");
+                String myOwnerid = (String)getState("OwnerID");
+                // DEBUG System.out.println("Account: custid: " + custid + "; ownerid: " + myOwnerid);
+
+                return (PatronID.equals(myOwnerid));
+            }
+        }
+
+
+        public void update() // save()
+        {
+            updateStateInDatabase();
+        }
+
+
+
+        private void updateStateInDatabase()
+        {
+            try
+            {
+                if (persistentState.getProperty("BookId") != null)
+                {
+                    // update
+                    Properties whereClause = new Properties();
+                    whereClause.setProperty("BookId",
+                            persistentState.getProperty("BookId"));
+                    updatePersistentState(mySchema, persistentState, whereClause);
+                    updateStatusMessage = "Book data for book id : " + persistentState.getProperty("AccountNumber") + " updated successfully in database!";
+                }
+                else
+                {
+                    // insert
+                    Integer BookId =
+                            insertAutoIncrementalPersistentState(mySchema, persistentState);
+                    persistentState.setProperty("BookId", "" + BookId.intValue());
+                    updateStatusMessage = "Book data for new Book : " +  persistentState.getProperty("BookId")
+                            + "installed successfully in database!";
+                }
+            }
+            catch (SQLException ex)
+            {
+                updateStatusMessage = "Error in installing Book data in database!";
+            }
+            //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
+        }
     }
 }
