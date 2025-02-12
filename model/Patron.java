@@ -1,19 +1,24 @@
+package model;
+
+
 import java.util.Properties;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.sql.*;
 
 import database.*;
+import exception.InvalidPrimaryKeyException;
+import exception.PasswordMismatchException;
 
 public class Patron {
     private static String table_name = "Patron";
 
 
 
-    public Patron (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException{
-        super(table_name);
+    public Patron (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
+        //super(table_name);
 
-        String query = "SELECT * FROM" + patron + " WHERE (ID= " + query_Id + ")";
+        String query = "SELECT * FROM" + table_name + " WHERE (ID= " + query_Id + ")";
 
         Vector dataRetrieved = getSelectQueryResult(query);
 
@@ -24,7 +29,7 @@ public class Patron {
                 throw new InvalidPrimaryKeyException();
             }else{
                 Properties retrievedPatronData = (Properties)dataRetrieved.elementAt(0);
-                persistentState = new Properties();
+                //persistentState = new Properties();
 
                 Enumeration allKeys = retrievedPatronData.propertyNames();
                 while(allKeys.hasMoreElements() == true){
@@ -32,13 +37,13 @@ public class Patron {
                     String nextValue = retrievedPatronData.getProperty(nextKey);
 
                     if(nextValue != null){
-                        persistentState.setProperty(nextKey, NextValue);
+                        //persistentState.setProperty(nextKey, NextValue);
 
                     }
                 }
             }
         }else{
-            throw new InvalidPrimaryKeyException();
+            throw new InvalidPrimaryKeyException("More than one value associated with that key");
         }
 
     }

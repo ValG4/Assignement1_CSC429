@@ -20,8 +20,8 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+//import javafx.scene.Scene;
+//import javafx.stage.Stage;
 
 // project imports
 import database.Persistable;
@@ -30,9 +30,9 @@ import impresario.IModel;
 import impresario.IView;
 import impresario.ISlideShow;
 import event.Event;
-import userinterface.MainStageContainer;
-import userinterface.View;
-import userinterface.WindowPosition;
+//import userinterface.MainStageContainer;
+//import userinterface.View;
+//import userinterface.WindowPosition;
 
 
 /** The superclass for all Fast Trax Model Entities that are also
@@ -47,8 +47,8 @@ public abstract class EntityBase extends Persistable
 	protected Properties persistentState;	// the field names and values from the database
 	private String myTableName;				// the name of our database table
 
-	protected Hashtable<String, Scene> myViews;
-	protected Stage myStage;
+	//protected Hashtable<String, Scene> myViews;
+	//protected Stage myStage;
 
 	protected Properties mySchema;
 
@@ -61,8 +61,8 @@ public abstract class EntityBase extends Persistable
 	//----------------------------------------------------------
 	protected EntityBase(String tablename)
 	{
-		myStage = MainStageContainer.getInstance();
-		myViews = new Hashtable<String, Scene>();
+		//myStage = MainStageContainer.getInstance();
+		//myViews = new Hashtable<String, Scene>();
 
 		// save our table name for later
 		myTableName = tablename;
@@ -129,23 +129,7 @@ public abstract class EntityBase extends Persistable
     }	
 
      //-----------------------------------------------------------------------------
-     public void swapToView(Scene otherView)
-     {
 
-		if (otherView == null)
-		{
-			new Event(Event.getLeafLevelClassName(this), "swapToView",
-				"Missing view for display ", Event.ERROR);
-			return;
-		}
-
-		myStage.setScene(otherView);
-		myStage.sizeToScene();
-			
-		//Place in center
-		WindowPosition.placeCenter(myStage);
-		
-    }
 
 }
 

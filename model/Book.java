@@ -1,48 +1,48 @@
-import java.util.vector;
+package model;
+
+import java.util.Properties;
+import java.util.Vector;
+import java.util.Enumeration;
 import java.sql.*;
 
-public class BookCollection{
-    private Vector <book> list_books;
+import database.Persistable;
+import database.*;
+import exception.InvalidPrimaryKeyException;
+import exception.PasswordMismatchException;
 
-    public BookCollection(){
-        list_books = new Vector<>();
+public class Book {
+    private static String table_name = "Book";
 
-    }
-    public void book_find_title(String title) throws SQLExeption{
-        list_books.clear();
-        String query = "SELECT * FROM Book WHERE bookTitle LIKE" + title;
-        try(){
-            Result = query.executeQuery();
-        }
+    public Book (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
+        super();
 
-    }
+        String query = "SELECT * FROM" + table_name + " WHERE (ID= " + query_id + ")";
 
-    public void book_find_year(int year) throws SQLException{
-        list_books.clear();
-        String query = "SELECT * FROM Book WHERE pubYear <=" + year;
-        try(){
-            result = query.executeQuery();
-        }
-    }
+        Vector dataRetrieved = getSelectQueryResult(query);
 
-    public void patron_age(int date) throws SQLException{
-        list_books.clear();
-        String query = "SELECT Name FROM Patron WHERE dateOfBirth <=" + date;
-        try(){
-            result = query.executeQuery();
-        }
-    }
+        if (dataRetrieved != null){
+            int size = dataRetrieved.size();
 
-    public void results_display(){
-        if (list_books.isEmpty()){
-            System.out.println("No books matching in the Database");
+            if (size !=1){
+                throw new InvalidPrimaryKeyException();
+            }else{
+                Properties retrievedBookData = (Properties)dataRetrieved.elementAt(0);
+                persistentState = new Properties();
 
+                Enumeration allKeys = retrievedBookData.propertyNames();
+                while(allKeys.hasMoreElements() == true){
+                    String nextKey = (String)allKeys.nextElement();
+                    String nextValue = retrievedBookData.getProperty(nextKey);
+
+                    if(nextValue != null){
+                        persistentState.setProperty(nextKey, NextValue);
+
+                    }
+                }
+            }
         }else{
-            System.out.println(Result)
+            throw new InvalidPrimaryKeyException("More than one value associated with that key");
         }
+
     }
 }
-
-Given a year, print all book data for books that are published before that year.
-5. Given a date, print all patron data for patrons that are younger than that date.
-6. Given a zip, print all patron data for patrons that live at that zip
