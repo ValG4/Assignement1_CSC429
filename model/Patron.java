@@ -16,7 +16,7 @@ public class Patron {
 
 
     public Patron (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
-        super(table_name);
+        //super(table_name);
 
         String query = "SELECT * FROM" + table_name + " WHERE (ID= " + query_Id + ")";
 

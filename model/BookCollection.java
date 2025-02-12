@@ -7,6 +7,7 @@ import java.util.Vector;
 import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*;
+import exception.PasswordMismatchException;
 import impresario.IView;
 //import userinterface.View;
 //import userinterface.ViewFactory;
@@ -18,11 +19,11 @@ public class BookCollection {
     private Vector<Book> bookList; //create booklist
 
     public BookCollection() {
-        super(myTableName); //saw this in account collection, looked important
+        //super(myTableName); //saw this in account collection, looked important
         bookList = new Vector<Book>(); //constructor
     }
 
-    public Vector<Book> findBooksOlderThanDate(String year) {
+    public Vector<Book> findBooksOlderThanDate(String year) throws PasswordMismatchException, InvalidPrimaryKeyException {
         // SQL Implementation here
         String query = ("SELECT * FROM " + myTableName + " WHERE (pubYear < '" + year + "')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
@@ -45,7 +46,8 @@ public class BookCollection {
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
         {
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
-                Properties nextBook = (Properties) allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                Properties nextBook; //properties inhereted from Entitybase
+                nextBook = (Properties) allDataRetrieved.elementAt(cnt);
                 bookList.add(new Book(nextBook));//update new booklist
             }
         }

@@ -19,7 +19,7 @@ public class PatronCollection
     private Vector<Patron> PatronList; //create booklist
 
     public PatronCollection() {
-        super(myTableName); //saw this in account collection, looked important
+        //super(myTableName); //saw this in account collection, looked important
         patronList = new Vector<Patron>(); //constructor
     }
 

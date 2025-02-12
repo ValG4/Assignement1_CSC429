@@ -5,6 +5,7 @@ import java.util.Vector;
 import java.util.Enumeration;
 import java.sql.*;
 
+import database.Persistable;
 import database.*;
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
@@ -13,9 +14,9 @@ public class Book {
     private static String table_name = "Book";
 
     public Book (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
-        super(table_name);
+        super();
 
-        String query = "SELECT * FROM" + Book + " WHERE (ID= " + query_id + ")";
+        String query = "SELECT * FROM" + table_name + " WHERE (ID= " + query_id + ")";
 
         Vector dataRetrieved = getSelectQueryResult(query);
 

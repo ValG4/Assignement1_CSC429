@@ -79,7 +79,7 @@ public class JDBCBroker
 	
 	// private constructor for singleton
 	//----------------------------------------------------------
-	protected JDBCBroker()
+    public JDBCBroker()
     	{
     		// DEBUG: System.out.println("JDBCBroker.JDBCBroker()");
 		props = new PropertyFile("dbConfig.ini");
