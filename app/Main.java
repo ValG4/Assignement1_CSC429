@@ -1,3 +1,5 @@
+package app;
+
 import database.JDBCBroker;
 import model.Book;
 import model.BookCollection;

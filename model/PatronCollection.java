@@ -3,16 +3,16 @@ package model; //in model folder
 // project imports (just copied from account collection, no idea what these do)
 import java.util.Properties;
 import java.util.Vector;
-import javafx.scene.Scene;
+//import javafx.scene.Scene;
 import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*;
 import impresario.IView;
-import userinterface.View;
-import userinterface.ViewFactory;
+//import userinterface.View;
+//import userinterface.ViewFactory;
 
 
-public class PatronCollection extends EntityBase implements IView
+public class PatronCollection
 {
     private static final String myTableName = "Patron"; //establish database table name
 
@@ -26,7 +26,7 @@ public class PatronCollection extends EntityBase implements IView
 
     public Vector<Patron> findPatronsOlderThanDate(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -44,7 +44,7 @@ public class PatronCollection extends EntityBase implements IView
 
     public Vector<Patron> findPatronsYoungerThan(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -61,7 +61,7 @@ public class PatronCollection extends EntityBase implements IView
 
     public Vector<Patron> findPatronsAtZipCode(String zip){
 
-        String query = ("SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"; //query to find the books older than given date
+        String query = ("SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
