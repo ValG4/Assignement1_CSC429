@@ -7,6 +7,7 @@ import java.util.Vector;
 import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*;
+import exception.PasswordMismatchException;
 import impresario.IView;
 //import userinterface.View;
 //import userinterface.ViewFactory;
@@ -16,15 +17,15 @@ public class PatronCollection extends EntityBase
 {
     private static final String myTableName = "Patron"; //establish database table name
 
-    private Vector<Patron> PatronList; //create booklist
+    private Vector<Patron> patronList; //create booklist
 
     public PatronCollection() {
-        super();
+        super(myTableName);
         //super(myTableName); //saw this in account collection, looked important
         patronList = new Vector<Patron>(); //constructor
     }
 
-    public Vector<Patron> findPatronsOlderThanDate(String date) {
+    public Vector<Patron> findPatronsOlderThanDate (String date) throws PasswordMismatchException, InvalidPrimaryKeyException {
         // SQL Implementation here
         String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
@@ -42,7 +43,7 @@ public class PatronCollection extends EntityBase
     }
 
 
-    public Vector<Patron> findPatronsYoungerThan(String date) {
+    public Vector<Patron> findPatronsYoungerThan(String date) throws PasswordMismatchException, InvalidPrimaryKeyException {
         // SQL Implementation here
         String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
@@ -59,7 +60,7 @@ public class PatronCollection extends EntityBase
     }
 
 
-    public Vector<Patron> findPatronsAtZipCode(String zip){
+    public Vector<Patron> findPatronsAtZipCode(String zip) throws PasswordMismatchException, InvalidPrimaryKeyException {
 
         String query = ("SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
@@ -84,8 +85,8 @@ public class PatronCollection extends EntityBase
         {
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
             {
-                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
-                patronList.add(new Book(nextBook));//update booklist
+                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase
+                patronList.add(new Patron(nextPatron));//update booklist
             }
         }
         return patronList;
