@@ -17,9 +17,11 @@ public class Main{
 
 
         //Book model_book = new Book();
-        BookCollection book_col = new BookCollection();
+        BookCollection book_col;
+        book_col = new BookCollection();
         //Patron model_patron = new Patron();
-        PatronCollection patron_col = new PatronCollection();
+        PatronCollection patron_col;
+        patron_col = new PatronCollection();
 
         Scanner scanner = new Scanner(System.in);
 

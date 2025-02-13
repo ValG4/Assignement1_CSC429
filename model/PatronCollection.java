@@ -12,17 +12,17 @@ import impresario.IView;
 //import userinterface.ViewFactory;
 
 
-public abstract class PatronCollection extends EntityBase
+public class PatronCollection extends EntityBase
 {
     private static final String myTableName = "Patron"; //establish database table name
 
     private Vector<Patron> PatronList; //create booklist
 
     public PatronCollection() {
+        super();
         //super(myTableName); //saw this in account collection, looked important
         patronList = new Vector<Patron>(); //constructor
     }
-
 
     public Vector<Patron> findPatronsOlderThanDate(String date) {
         // SQL Implementation here

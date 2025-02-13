@@ -13,7 +13,7 @@ import impresario.IView;
 //import userinterface.ViewFactory;
 
 
-public abstract class BookCollection extends EntityBase {
+public class BookCollection extends EntityBase {
     private static final String myTableName = "Book"; //establish database table name
 
     private Vector<Book> bookList; //create booklist
