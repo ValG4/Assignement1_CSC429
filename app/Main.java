@@ -19,9 +19,6 @@ public class Main{
         BookCollection book_col = new BookCollection();
         Patron model_patron = new Patron();
         PatronCollection patron_col = new PatronCollection();
-
-
-
     }
 
 }

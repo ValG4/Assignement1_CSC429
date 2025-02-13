@@ -26,7 +26,7 @@ public class PatronCollection
 
     public Vector<Patron> findPatronsOlderThanDate(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"); //query to find the books older than given date
+        String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
         return processPatronData(allDataRetrieved);
 
@@ -35,7 +35,7 @@ public class PatronCollection
 
     public Vector<Patron> findPatronsYoungerThan(String date) {
         // SQL Implementation here
-        String query = ("SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"); //query to find the books older than given date
+        String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
         return processPatronData(allDataRetrieved);
 
@@ -44,7 +44,7 @@ public class PatronCollection
 
     public Vector<Patron> findPatronsAtZipCode(String zip){
 
-        String query = ("SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"); //query to find the books older than given date
+        String query = "SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"); //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
         return processPatronData(allDataRetrieved);
 
