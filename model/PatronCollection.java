@@ -27,7 +27,7 @@ public class PatronCollection extends EntityBase
 
     public Vector<Patron> findPatronsOlderThanDate (String date) throws PasswordMismatchException, InvalidPrimaryKeyException {
         // SQL Implementation here
-        String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"); //query to find the books older than given date
+        String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth < '" + date +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -45,7 +45,7 @@ public class PatronCollection extends EntityBase
 
     public Vector<Patron> findPatronsYoungerThan(String date) throws PasswordMismatchException, InvalidPrimaryKeyException {
         // SQL Implementation here
-        String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"); //query to find the books older than given date
+        String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -62,7 +62,7 @@ public class PatronCollection extends EntityBase
 
     public Vector<Patron> findPatronsAtZipCode(String zip) throws PasswordMismatchException, InvalidPrimaryKeyException {
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (zip > '" + zip +"')"); //query to find the books older than given date
+        String query = "SELECT * FROM " + myTableName + " WHERE (zip > " + zip +")";
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector
@@ -96,6 +96,22 @@ public class PatronCollection extends EntityBase
         if(mySchema == null){
             mySchema = getSchemaInfo(table_name);
         }
+    }
+
+    public Object getState(String key) {
+        if (key.equals("PatronId"))
+            return patronList;
+        else
+        if (key.equals("BookList")) {
+            return this;
+        }
+        return null;
+    }
+
+    //----------------------------------------------------------------
+    public void stateChangeRequest(String key, Object value) {
+
+        myRegistry.updateSubscribers(key, this);
     }
 
 

@@ -13,7 +13,7 @@ import impresario.IView;
 //import userinterface.ViewFactory;
 
 
-public abstract class BookCollection extends EntityBase implements IView
+public class BookCollection extends EntityBase
 {
     private static final String myTableName = "Book"; //establish database table name
 
@@ -64,16 +64,8 @@ public abstract class BookCollection extends EntityBase implements IView
     private Vector<Book> processBookData(Vector allDataRetrieved)  {
         if (allDataRetrieved != null) {
             for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
-                Properties nextBook=(Properties)allDataRetrieved.elementAt(cnt); //Properties are attribute of EntityBase.java, nextbook is variable declaration
-                try {
-                    bookList.insertElementAt(new Book(nextBook));
-                } catch (InvalidPrimaryKeyException e) {
-                    System.out.println("Error: " + e.getMessage());
-                } catch (PasswordMismatchException e) {
-                    System.out.println("Incorrect password. Please try again.");
-                }
-
-
+                Properties nextBook=(Properties)allDataRetrieved.elementAt(cnt); //Properties are attribute of EntityBase.java, nextbook is variable declaratio
+                bookList.add(new Book(nextBook));
             }
         }
         return bookList;
