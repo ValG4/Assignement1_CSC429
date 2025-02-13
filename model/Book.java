@@ -9,10 +9,11 @@ import database.*;
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
 
-public abstract class Book extends EntityBase{
+public class Book extends EntityBase{
     private static String table_name = "Book";
 
     protected Properties dependencies;
+    protected Properties persistentState;
     private String updateStatusMessage = "";
 
     public Book (String query_id) throws InvalidPrimaryKeyException{
@@ -20,7 +21,7 @@ public abstract class Book extends EntityBase{
 
         String query = "SELECT * FROM " + table_name + " WHERE (ID= " + query_id + ")";
 
-        Vector dataRetrieved = getSelectQueryResult(query);
+        Vector<Properties> dataRetrieved = getSelectQueryResult(query);
 
         if (dataRetrieved != null) {
             int size = dataRetrieved.size();
@@ -79,28 +80,26 @@ public abstract class Book extends EntityBase{
         myRegistry.updateSubscribers(key, this);
     }
 
-
-    public boolean verifyOwnership(PatronCollection Patron)
+    public static int compare(Book a, Book b)
     {
-        if (Patron == null)
-        {
-            return false;
-        }
-        else
-        {
-            String PatronID = (String)Patron.getState("ID");
-            String myOwnerid = (String)getState("OwnerID");
-            // DEBUG System.out.println("Account: custid: " + custid + "; ownerid: " + myOwnerid);
-            return (PatronID.equals(myOwnerid));
-        }
+        String aNum = (String)a.getState("BookId");
+        String bNum = (String)b.getState("BookId");
+
+        return aNum.compareTo(bNum);
     }
 
-
-    public void update() // save()
+    public Vector<String> getEntryListView()
     {
-        updateStateInDatabase();
-    }
+        Vector<String> v = new Vector<String>();
 
+        v.addElement(persistentState.getProperty("BookId"));
+        v.addElement(persistentState.getProperty("bookTitle"));
+        v.addElement(persistentState.getProperty("author"));
+        v.addElement(persistentState.getProperty("pubYear"));
+        v.addElement(persistentState.getProperty("status"));
+
+        return v;
+    }
 
 
     private void updateStateInDatabase()
@@ -131,5 +130,11 @@ public abstract class Book extends EntityBase{
             updateStatusMessage = "Error in installing Book data in database!";
         }
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
+    }
+
+    protected void initializeSchema(String table_name){
+        if(mySchema == null){
+            mySchema = getSchemaInfo(table_name);
+        }
     }
 }
