@@ -91,4 +91,12 @@ public class PatronCollection extends EntityBase
         }
         return patronList;
     }
+
+    protected void initializeSchema(String table_name){
+        if(mySchema == null){
+            mySchema = getSchemaInfo(table_name);
+        }
+    }
+
+
 }

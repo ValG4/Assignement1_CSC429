@@ -19,7 +19,7 @@ public class BookCollection extends EntityBase {
     private Vector<Book> bookList; //create booklist
 
     public BookCollection() {
-        //super(myTableName); //saw this in account collection, looked important
+        super(myTableName); //saw this in account collection, looked important
         bookList = new Vector<Book>(); //constructor
     }
 
@@ -84,5 +84,11 @@ public class BookCollection extends EntityBase {
             }
         }
         return bookList;
+    }
+
+    protected void initializeSchema(String table_name){
+        if(mySchema == null){
+            mySchema = getSchemaInfo(table_name);
+        }
     }
 }
