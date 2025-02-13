@@ -15,10 +15,23 @@ public class Main{
         JDBCBroker db = new JDBCBroker();
         db.getConnection();
 
-        Book model_book = new Book();
-        BookCollection book_col = new BookCollection();
-        Patron model_patron = new Patron();
-        PatronCollection patron_col = new PatronCollection();
+
+        //Book model_book = new Book();
+        BookCollection book_col;
+        book_col = new BookCollection();
+        //Patron model_patron = new Patron();
+        PatronCollection patron_col;
+        patron_col = new PatronCollection();
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("What would you like to do?");
+        System.out.println("1. Add a book");
+        System.out.println("2. Add a patron");
+        System.out.println("3.");
+
+
+
     }
 
 }

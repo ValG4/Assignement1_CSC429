@@ -1,0 +1,89 @@
+Index: model/BookCollection.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model; //in model folder\r\n\r\n// project imports (just copied from account collection, no idea what these do)\r\nimport java.util.Properties;\r\nimport java.util.Vector;\r\n//import javafx.scene.Scene;\r\nimport exception.InvalidPrimaryKeyException;\r\nimport event.Event;\r\nimport database.*;\r\nimport exception.PasswordMismatchException;\r\nimport impresario.IView;\r\n//import userinterface.View;\r\n//import userinterface.ViewFactory;\r\n\r\n\r\npublic class BookCollection {\r\n    private static final String myTableName = \"Book\"; //establish database table name\r\n\r\n    private Vector<Book> bookList; //create booklist\r\n\r\n    public BookCollection() {\r\n        //super(myTableName); //saw this in account collection, looked important\r\n        bookList = new Vector<Book>(); //constructor\r\n    }\r\n\r\n    public Vector<Book> findBooksOlderThanDate(String year) throws PasswordMismatchException, InvalidPrimaryKeyException {\r\n        // SQL Implementation here\r\n        String query = (\"SELECT * FROM \" + myTableName + \" WHERE (pubYear < '\" + year + \"')\"); //query to find the books older than given date\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector (making sure its not empty)\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {\r\n                Properties nextBook = (Properties) allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n                bookList.add(new Book(nextBook));//update new booklist\r\n            }\r\n        }\r\n        return bookList;\r\n    }\r\n\r\n    public Vector<Book> findBooksNewerThanDate(String year) {\r\n        // SQL Implementation here                                          IF THE COLUMN/DATABASE USES A VARCHAR, we need single quotes ' instead of \" (see photo from class)\r\n        String query = (\"SELECT * FROM \" + myTableName + \" WHERE (pubYear > '\" + year + \"')\"); //query to find the books older than given date\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {\r\n                Properties nextBook; //properties inhereted from Entitybase\r\n                nextBook = (Properties) allDataRetrieved.elementAt(cnt);\r\n                bookList.add(new Book(nextBook));//update new booklist\r\n            }\r\n        }\r\n        return bookList;\r\n    }\r\n\r\n    //CONFIGURE DBCONFIG.INI HAS THE RIGHT INFORMATION IN IT (IN INSTALL DIRECTORY OF INTELLIJ OR PROJECT)\r\n\r\n    public Vector<Book> findBooksWithTitleLike(String title) {\r\n        // SQL Implementation here\r\n        String query = \"SELECT * FROM \" + myTableName + \" WHERE bookTitle LIKE '%\" + title + \"%'\"; //sql query to find book titles similar to given string\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {\r\n                Properties nextBook = (Properties) allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n                bookList.add(new Book(nextBook));//update booklist\r\n            }\r\n        }\r\n        return bookList;\r\n    }\r\n\r\n    public Vector<Book> findBooksWithAuthorLike(String author) {\r\n        // SQL Implementation here\r\n        String query = \"SELECT * FROM \" + myTableName + \" WHERE author LIKE '%\" + author + \"%'\"; //sql query to find books written by same author\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {\r\n                Properties nextBook = (Properties) allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n                bookList.add(new Book(nextBook));//update booklist\r\n            }\r\n        }\r\n        return bookList;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/BookCollection.java b/model/BookCollection.java
+--- a/model/BookCollection.java	(revision cf17ca2641adcbc97de87637a60018ddab96aaea)
++++ b/model/BookCollection.java	(date 1739398939349)
+@@ -13,7 +13,7 @@
+ //import userinterface.ViewFactory;
+ 
+ 
+-public class BookCollection {
++public abstract class BookCollection extends EntityBase {
+     private static final String myTableName = "Book"; //establish database table name
+ 
+     private Vector<Book> bookList; //create booklist
+Index: model/Patron.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\n\r\nimport java.util.Properties;\r\nimport java.util.Vector;\r\nimport java.util.Enumeration;\r\nimport java.sql.*;\r\n\r\nimport database.*;\r\nimport exception.InvalidPrimaryKeyException;\r\nimport exception.PasswordMismatchException;\r\n\r\npublic class Patron {\r\n    private static String table_name = \"Patron\";\r\n\r\n\r\n\r\n    public Patron (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {\r\n        //super(table_name);\r\n\r\n        String query = \"SELECT * FROM\" + table_name + \" WHERE (ID= \" + query_Id + \")\";\r\n\r\n        Vector dataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (dataRetrieved != null){\r\n            int size = dataRetrieved.size();\r\n\r\n            if (size !=1){\r\n                throw new InvalidPrimaryKeyException();\r\n            }else{\r\n                Properties retrievedPatronData = (Properties)dataRetrieved.elementAt(0);\r\n                //persistentState = new Properties();\r\n\r\n                Enumeration allKeys = retrievedPatronData.propertyNames();\r\n                while(allKeys.hasMoreElements() == true){\r\n                    String nextKey = (String)allKeys.nextElement();\r\n                    String nextValue = retrievedPatronData.getProperty(nextKey);\r\n\r\n                    if(nextValue != null){\r\n                        //persistentState.setProperty(nextKey, NextValue);\r\n\r\n                    }\r\n                }\r\n            }\r\n        }else{\r\n            throw new InvalidPrimaryKeyException(\"More than one value associated with that key\");\r\n        }\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/Patron.java b/model/Patron.java
+--- a/model/Patron.java	(revision cf17ca2641adcbc97de87637a60018ddab96aaea)
++++ b/model/Patron.java	(date 1739398969505)
+@@ -10,7 +10,7 @@
+ import exception.InvalidPrimaryKeyException;
+ import exception.PasswordMismatchException;
+ 
+-public class Patron {
++public abstract class Patron extends EntityBase{
+     private static String table_name = "Patron";
+ 
+ 
+Index: model/PatronCollection.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model; //in model folder\r\n\r\n// project imports (just copied from account collection, no idea what these do)\r\nimport java.util.Properties;\r\nimport java.util.Vector;\r\n//import javafx.scene.Scene;\r\nimport exception.InvalidPrimaryKeyException;\r\nimport event.Event;\r\nimport database.*;\r\nimport impresario.IView;\r\n//import userinterface.View;\r\n//import userinterface.ViewFactory;\r\n\r\n\r\npublic class PatronCollection\r\n{\r\n    private static final String myTableName = \"Patron\"; //establish database table name\r\n\r\n    private Vector<Patron> PatronList; //create booklist\r\n\r\n    public PatronCollection() {\r\n        //super(myTableName); //saw this in account collection, looked important\r\n        patronList = new Vector<Patron>(); //constructor\r\n    }\r\n\r\n\r\n    public Vector<Patron> findPatronsOlderThanDate(String date) {\r\n        // SQL Implementation here\r\n        String query = (\"SELECT * FROM \" + myTableName + \" WHERE (dateOfBirth < '\" + date +\"')\"); //query to find the books older than given date\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)\r\n            {\r\n                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n\r\n                patronList.add(new Patron(nextPatron));//update new booklist\r\n            }\r\n        }\r\n        return patronList;\r\n    }\r\n\r\n\r\n    public Vector<Patron> findPatronsYoungerThan(String date) {\r\n        // SQL Implementation here\r\n        String query = (\"SELECT * FROM \" + myTableName + \" WHERE (dateOfBirth > '\" + date +\"')\"); //query to find the books older than given date\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)\r\n            {\r\n                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n                patronList.add(new Patron(nextPatron));//update new booklist\r\n            }\r\n        }\r\n        return patronList;\r\n    }\r\n\r\n\r\n    public Vector<Patron> findPatronsAtZipCode(String zip){\r\n\r\n        String query = (\"SELECT * FROM \" + myTableName + \" WHERE (zip > '\" + zip +\"')\"); //query to find the books older than given date\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)\r\n            {\r\n                Properties nextPatron= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n                patronList.add(new Patron(nextPatron));//update new booklist\r\n            }\r\n        }\r\n        return patronList;\r\n    }\r\n\r\n    public Vector<Patron> findPatronsWithNameLike(String name){\r\n        // SQL Implementation here\r\n        String query = \"SELECT * FROM \" + myTableName + \" WHERE name LIKE '%\" + name + \"%'\"; //sql query to find books written by same author\r\n        Vector allDataRetrieved = getSelectQueryResult(query);\r\n\r\n        if (allDataRetrieved != null) //iterting through result of table query to add to new vector\r\n        {\r\n            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)\r\n            {\r\n                Properties nextBook= (Properties)allDataRetrieved.elementAt(cnt); //properties inhereted from Entitybase\r\n                patronList.add(new Book(nextBook));//update booklist\r\n            }\r\n        }\r\n        return patronList;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/PatronCollection.java b/model/PatronCollection.java
+--- a/model/PatronCollection.java	(revision cf17ca2641adcbc97de87637a60018ddab96aaea)
++++ b/model/PatronCollection.java	(date 1739398939327)
+@@ -12,7 +12,7 @@
+ //import userinterface.ViewFactory;
+ 
+ 
+-public class PatronCollection
++public abstract class PatronCollection extends EntityBase
+ {
+     private static final String myTableName = "Patron"; //establish database table name
+ 
+Index: app/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import database.JDBCBroker;\r\nimport exception.InvalidPrimaryKeyException;\r\nimport exception.PasswordMismatchException;\r\nimport model.Book;\r\nimport model.BookCollection;\r\nimport model.Patron;\r\nimport model.PatronCollection;\r\n\r\nimport java.util.*;\r\n\r\npublic class Main{\r\n    public static void main(String[] args) throws PasswordMismatchException, InvalidPrimaryKeyException {\r\n        System.out.println(\"Book system V1\");\r\n\r\n        JDBCBroker db = new JDBCBroker();\r\n        db.getConnection();\r\n\r\n        Book model_book = new Book();\r\n        BookCollection book_col = new BookCollection();\r\n        Patron model_patron = new Patron();\r\n        PatronCollection patron_col = new PatronCollection();\r\n\r\n\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/Main.java b/app/Main.java
+--- a/app/Main.java	(revision cf17ca2641adcbc97de87637a60018ddab96aaea)
++++ b/app/Main.java	(date 1739398864390)
+@@ -15,11 +15,19 @@
+         JDBCBroker db = new JDBCBroker();
+         db.getConnection();
+ 
+-        Book model_book = new Book();
++
++        //Book model_book = new Book();
+         BookCollection book_col = new BookCollection();
+-        Patron model_patron = new Patron();
++        //Patron model_patron = new Patron();
+         PatronCollection patron_col = new PatronCollection();
+ 
++        Scanner scanner = new Scanner(System.in);
++
++        System.out.println("What would you like to do?");
++        System.out.println("1. Add a book");
++        System.out.println("2. Add a patron");
++        System.out.println("3.");
++
+ 
+ 
+     }

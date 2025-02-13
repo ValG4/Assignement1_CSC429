@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86ae0a6b-0078-4fba-87f8-ff445934a79b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="patch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignement1_CSC429.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignement1_CSC429.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/BookCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/BookCollection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/PatronCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/PatronCollection.java" afterDir="false" />
     </list>
@@ -23,82 +22,101 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;arihawk112&quot;
+    &quot;assignee&quot;: &quot;ValG4&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ValG4/Assignement1_CSC429&quot;,
-    &quot;accountId&quot;: &quot;410c26ec-dd18-4f8f-8286-4738cd4b54d6&quot;
+    &quot;url&quot;: &quot;https://github.com/ValG4/Assignement1_CSC429.git&quot;,
+    &quot;accountId&quot;: &quot;fd2deb51-0a51-408b-9b86-84c3e896b56f&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="2sg755vVS4APxfRHZFSgcnQ0O9F" />
+  <component name="ProjectId" id="2swsOiRrrwQX5NurtgL6VnBqjk8" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/arion/Downloads/openjfx-23.0.2_windows-x64_bin-sdk.zip&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="Java Scratch" nameIsGenerated="true">
-      <module name="Assignement1_CSC429" />
-      <shortenClasspath name="NONE" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\arion\Downloads\javafx-sdk-21\lib&quot; --add-modules javafx.controls,javafx.fxml " />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="OOSE" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="OOSE" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="ShConfigurationType">
-      <option name="SCRIPT_TEXT" value="" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="powershell.exe" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="true" />
-      <envs />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="86ae0a6b-0078-4fba-87f8-ff445934a79b" name="Changes" comment="" />
-      <created>1738865177649</created>
+      <changelist id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="" />
+      <created>1739377943021</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1738865177649</updated>
+      <updated>1739377943021</updated>
     </task>
+    <task id="LOCAL-00001" summary="App improvement and started bug fixing/resolving">
+      <option name="closed" value="true" />
+      <created>1739379085273</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739379085273</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Bug fixing">
+      <option name="closed" value="true" />
+      <created>1739379815965</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739379815965</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added method to book.java">
+      <option name="closed" value="true" />
+      <created>1739400191545</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739400191545</updated>
+    </task>
+    <task id="LOCAL-00004" summary="patch">
+      <option name="closed" value="true" />
+      <created>1739400971878</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739400971878</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="App improvement and started bug fixing/resolving" />
+    <MESSAGE value="Bug fixing" />
+    <MESSAGE value="added method to book.java" />
+    <MESSAGE value="fixes and methods added" />
+    <MESSAGE value="patch" />
+    <option name="LAST_COMMIT_MESSAGE" value="patch" />
   </component>
 </project>
