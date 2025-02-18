@@ -108,7 +108,7 @@ public class Patron extends EntityBase{
     }
 
 
-    private void updateStateInDatabase()
+    public void updateStateInDatabase()
     {
         try
         {

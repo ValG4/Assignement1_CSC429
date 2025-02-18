@@ -1,8 +1,6 @@
 package model;
 
-import java.util.Properties;
-import java.util.Vector;
-import java.util.Enumeration;
+import java.util.*;
 import java.sql.*;
 import database.*;
 
@@ -11,7 +9,6 @@ import exception.PasswordMismatchException;
 
 public class Book extends EntityBase{
     private static String table_name = "Book";
-
     protected Properties dependencies;
     protected Properties persistentState;
     private String updateStatusMessage = "";
@@ -102,7 +99,7 @@ public class Book extends EntityBase{
     }
 
 
-    private void updateStateInDatabase()
+    public void updateStateInDatabase()
     {
         try
         {
@@ -118,11 +115,13 @@ public class Book extends EntityBase{
             else
             {
                 // insert
-                Integer BookId =
-                        insertAutoIncrementalPersistentState(mySchema, persistentState);
+
+
+                Integer BookId = insertAutoIncrementalPersistentState(mySchema, persistentState);
+
+
                 persistentState.setProperty("BookId", "" + BookId.intValue());
-                updateStatusMessage = "Book data for new Book : " +  persistentState.getProperty("BookId")
-                        + "installed successfully in database!";
+                updateStatusMessage = "Book data for new Book : " +  persistentState.getProperty("BookId") + "installed successfully in database!";
             }
         }
         catch (SQLException ex)

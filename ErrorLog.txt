@@ -1,0 +1,13 @@
+[2/13/25 1:42 PM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/13/25 1:42 PM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:13 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:13 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:14 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:14 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:14 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:14 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:25 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 11:25 AM]|JDBCBroker|JDBCBroker|Error|NOTAG|null<Could not load driver class[org.mariadb.jdbc.Driver]>
+[2/18/25 12:46 PM]|Book|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1265: (conn=11914) Data truncated for column 'status' at row 1>
+[2/18/25 12:49 PM]|Book|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1265: (conn=11929) Data truncated for column 'status' at row 1>
+[2/18/25 1:08 PM]|Patron|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: (conn=12264) Field 'name' doesn't have a default value>
