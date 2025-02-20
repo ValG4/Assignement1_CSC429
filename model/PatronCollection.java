@@ -43,7 +43,7 @@ public class PatronCollection extends EntityBase
     }
 
 
-    public Vector<Patron> findPatronsYoungerThan(String date) throws PasswordMismatchException, InvalidPrimaryKeyException {
+    public Vector<Patron> findPatronsYoungerThan(String date)  {
         // SQL Implementation here
         String query = "SELECT * FROM " + myTableName + " WHERE (dateOfBirth > '" + date +"')"; //query to find the books older than given date
         Vector allDataRetrieved = getSelectQueryResult(query);
@@ -60,9 +60,9 @@ public class PatronCollection extends EntityBase
     }
 
 
-    public Vector<Patron> findPatronsAtZipCode(String zip) throws PasswordMismatchException, InvalidPrimaryKeyException {
+    public Vector<Patron> findPatronsAtZipCode(String zip)  {
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (zip > " + zip +")";
+        String query = "SELECT * FROM " + myTableName + " WHERE (zip = " + zip +")";
         Vector allDataRetrieved = getSelectQueryResult(query);
 
         if (allDataRetrieved != null) //iterting through result of table query to add to new vector

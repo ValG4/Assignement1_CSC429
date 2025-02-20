@@ -19,8 +19,8 @@ public class Main{
         System.out.println("2. Add a Patron");
         System.out.println("3. Search Boo1ks by Title");
         System.out.println("4. Sort Books by Year");
-        //System.out.println("5. Search Patrons by Birthday");
-        //System.out.println("6. Search Patrons by Zip");
+        System.out.println("5. Search Patrons by Birthday");
+        System.out.println("6. Search Patrons by Zip");
         System.out.println("7. Exit");
 
         int choice = scanner.nextInt();
@@ -40,10 +40,10 @@ public class Main{
                 searchBooksOlderThan(scanner);
                 break;
             case 5:
-                //searchPatronsByBirthday(scanner);
+                searchPatronsYoungerThan(scanner);
                 break;
             case 6:
-               // searchPatronsByZip(scanner);
+                searchPatronsByZip(scanner);
                 break;
             case 7:
                 System.out.println("Exiting...");
@@ -172,36 +172,35 @@ public class Main{
             }
         }
     }
-//    private static void searchBooksByTitle(Scanner scanner) {
-//        System.out.print("Enter a book title (or part of it) to search: ");
-//        String searchTerm = scanner.nextLine();
-//        BookCollection book_result = new BookCollection(); // Assuming Book has a default constructor
-//
-//        Vector<Book> books = book_result.findBooksWithTitleLike(searchTerm);
-//
-//        if (books.isEmpty()) {
-//            System.out.println("No books found with title containing: " + searchTerm);
-//        } else {
-//            System.out.println("Books found with title containing '" + searchTerm + "':");
-//            for (Book b : books) {
-//                System.out.println("Title: " + b.getState("bookTitle") + ", Author: " + b.getState("author"));
-//            }
-//        }
-//    }
-//    private static void searchByBirthday(Scanner scanner) {
-//        System.out.print("Enter birthdate to search: ");
-//        String searchTerm = scanner.nextLine();
-//        PatronCollection patron_result = new PatronCollection(); // Assuming Book has a default constructor
-//
-//        Vector<Book> patrons = patron_result.findBooksWithTitleLike(searchTerm);
-//
-//        if (books.isEmpty()) {
-//            System.out.println("No books found with title containing: " + searchTerm);
-//        } else {
-//            System.out.println("Books found with title containing '" + searchTerm + "':");
-//            for (Book b : books) {
-//                System.out.println("Title: " + b.getState("bookTitle") + ", Author: " + b.getState("author"));
-//            }
-//        }
-//    }
+
+    private static void searchPatronsYoungerThan(Scanner scanner) {
+        System.out.print("Look for patrons born after: ");
+        String searchTerm = scanner.nextLine();
+        PatronCollection patron_result = new PatronCollection(); // Assuming Book has a default constructor
+
+        Vector<Patron> patrons = patron_result.findPatronsYoungerThan(searchTerm);
+        if (patrons.isEmpty()) {
+            System.out.println("No patrons found younger than date: " + searchTerm);
+        } else {
+            System.out.println("Patrons born after: '" + searchTerm + "':");
+            for (Patron b : patrons) {
+                System.out.println("name: " + b.getState("name") + ", Birthday: " + b.getState("dateOfBirth"));
+            }
+        }
+    }
+    private static void searchPatronsByZip(Scanner scanner) {
+        System.out.print("Look for patrons in ZIP: ");
+        String searchTerm = scanner.nextLine();
+        PatronCollection patron_result = new PatronCollection(); // Assuming Book has a default constructor
+
+        Vector<Patron> patrons = patron_result.findPatronsAtZipCode(searchTerm);
+        if (patrons.isEmpty()) {
+            System.out.println("No patrons found within this ZIP: " + searchTerm);
+        } else {
+            System.out.println("Patrons located in: '" + searchTerm + "':");
+            for (Patron b : patrons) {
+                System.out.println("name: " + b.getState("name") + ", ZIP code: " + b.getState("zip"));
+            }
+        }
+    }
 }
