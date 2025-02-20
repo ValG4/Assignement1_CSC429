@@ -17,7 +17,7 @@ public class Main{
         System.out.println("What would you like to do?");
         System.out.println("1. Add a Book");
         System.out.println("2. Add a Patron");
-        System.out.println("3. Search Books by Title");
+        System.out.println("3. Search Boo1ks by Title");
         System.out.println("4. Sort Books by Year");
         //System.out.println("5. Search Patrons by Birthday");
         //System.out.println("6. Search Patrons by Zip");
@@ -145,7 +145,7 @@ public class Main{
         String searchTerm = scanner.nextLine();
         BookCollection book_result = new BookCollection(); // Assuming Book has a default constructor
 
-        Vector<Book> books = book_result.findBooksOlderThanDate(searchTerm);
+        Vector<Book> books = book_result.findBooksWithTitleLike(searchTerm);
 
         if (books.isEmpty()) {
             System.out.println("No books found with title containing: " + searchTerm);
@@ -188,12 +188,12 @@ public class Main{
 //            }
 //        }
 //    }
-//    private static void searchBooksByTitle(Scanner scanner) {
-//        System.out.print("Enter a book title (or part of it) to search: ");
+//    private static void searchByBirthday(Scanner scanner) {
+//        System.out.print("Enter birthdate to search: ");
 //        String searchTerm = scanner.nextLine();
-//        BookCollection book_result = new BookCollection(); // Assuming Book has a default constructor
+//        PatronCollection patron_result = new PatronCollection(); // Assuming Book has a default constructor
 //
-//        Vector<Book> books = book_result.findBooksWithTitleLike(searchTerm);
+//        Vector<Book> patrons = patron_result.findBooksWithTitleLike(searchTerm);
 //
 //        if (books.isEmpty()) {
 //            System.out.println("No books found with title containing: " + searchTerm);
