@@ -74,5 +74,45 @@ public class PatronTableModel {
         email.set(charge);
     }
 
+    public String getName() {
+        return name.get();
+    }
+
+    //----------------------------------------------------------------------------
+    public void setName(String charge)
+    {
+        name.set(charge);
+    }
+
+    public String getStateCode() {
+        return stateCode.get();
+    }
+
+    //----------------------------------------------------------------------------
+    public void setStateCode(String charge)
+    {
+        stateCode.set(charge);
+    }
+
+    public String getStatus() {
+        return status.get();
+    }
+
+    //----------------------------------------------------------------------------
+    public void setStatus(String charge)
+    {
+        status.set(charge);
+    }
+
+    public String getZip() {
+        return zip.get();
+    }
+
+    //----------------------------------------------------------------------------
+    public void setZip(String charge)
+    {
+        zip.set(charge);
+    }
+
 
 }

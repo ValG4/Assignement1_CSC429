@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="patch">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_3_0_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/Librarian.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userinterface/BookTableModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userinterface/PatronTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_3_0_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_3_0_3.xml" afterDir="false" />
+    <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="assignement 2 tables">
+      <change afterPath="$PROJECT_DIR$/userinterface/BookCollectionView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assignement1_CSC429.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignement1_CSC429.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorLog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userinterface/PatronTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/PatronTableModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +104,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739400971878</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="assignement 2 tables">
+      <option name="closed" value="true" />
+      <created>1741283383058</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741283383059</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +132,7 @@
     <MESSAGE value="added method to book.java" />
     <MESSAGE value="fixes and methods added" />
     <MESSAGE value="patch" />
-    <option name="LAST_COMMIT_MESSAGE" value="patch" />
+    <MESSAGE value="assignement 2 tables" />
+    <option name="LAST_COMMIT_MESSAGE" value="assignement 2 tables" />
   </component>
 </project>
