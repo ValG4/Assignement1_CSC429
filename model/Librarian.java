@@ -37,7 +37,7 @@ public class Librarian implements IView, IModel{
 
     // constructor for this class
     //----------------------------------------------------------
-    public Teller()
+    public Librarian()
     {
         myStage = MainStageContainer.getInstance();
         myViews = new Hashtable<String, Scene>();
