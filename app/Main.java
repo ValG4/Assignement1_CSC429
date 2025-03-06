@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args) throws PasswordMismatchException, InvalidPrimaryKeyException {
-        System.out.println("Book system V1");
+        System.out.println("Book system V2");
 
         JDBCBroker db = new JDBCBroker();
         db.getConnection();

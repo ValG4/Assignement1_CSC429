@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="patch">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_3_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/Librarian.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userinterface/BookTableModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userinterface/PatronTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_3_0_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mariadb_java_client_3_0_3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignement1_CSC429.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignement1_CSC429.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ErrorLog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/PatronCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/PatronCollection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,8 +38,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ValG4/Assignement1_CSC429&quot;,
-    &quot;accountId&quot;: &quot;410c26ec-dd18-4f8f-8286-4738cd4b54d6&quot;
+    &quot;url&quot;: &quot;https://github.com/ValG4/Assignement1_CSC429.git&quot;,
+    &quot;accountId&quot;: &quot;fd2deb51-0a51-408b-9b86-84c3e896b56f&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -52,7 +65,8 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/arion/Documents/School/OOSE/mariadb-java-client-3.0.3.jar&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
