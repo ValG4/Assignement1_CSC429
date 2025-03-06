@@ -12,7 +12,7 @@ public class BookTableModel {
     private final SimpleStringProperty status;
 
     //----------------------------------------------------------------------------
-    public AccountTableModel(Vector<String> accountData)
+    public BookTableModel(Vector<String> accountData)
     {
         BookId =  new SimpleStringProperty(accountData.elementAt(1));
         pubYear =  new SimpleStringProperty(accountData.elementAt(3));
