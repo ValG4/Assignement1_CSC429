@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="Added Views">
-      <change afterPath="$PROJECT_DIR$/userinterface/BookView.java" afterDir="false" />
+    <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="BookView">
+      <change afterPath="$PROJECT_DIR$/userinterface/PatronView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/BookCollectionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/BookCollectionView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/TransactionChoiceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/TransactionChoiceView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userinterface/BookView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/BookView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/userinterface/ViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/ViewFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741286134413</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="BookView">
+      <option name="closed" value="true" />
+      <created>1741709088951</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741709088951</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,6 +178,7 @@
     <MESSAGE value="View update" />
     <MESSAGE value="MainStageContainer" />
     <MESSAGE value="Added Views" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Views" />
+    <MESSAGE value="BookView" />
+    <option name="LAST_COMMIT_MESSAGE" value="BookView" />
   </component>
 </project>

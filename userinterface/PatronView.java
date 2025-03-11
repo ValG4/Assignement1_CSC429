@@ -30,15 +30,19 @@ import impresario.IModel;
 
 /** The class containing the Account View  for the ATM application */
 //==============================================================
-public class BookView extends View
+public class PatronView extends View
 {
 
     // GUI components
-    protected TextField bookId;
-    protected TextField author;
-    protected TextField pubYear;
-    protected TextField bookTitle;
+    protected TextField patronId;
+    protected TextField address;
+    protected TextField city;
+    protected TextField dateOfBirth;
+    protected TextField email;
+    protected TextField name;
+    protected TextField stateCode;
     protected TextField status;
+    protected TextField zip;
 
     protected Button cancelButton;
 
@@ -49,7 +53,7 @@ public class BookView extends View
     //----------------------------------------------------------
     public BookView(IModel account)
     {
-        super(account, "BookView");
+        super(account, "PatronView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -101,62 +105,103 @@ public class BookView extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("BOOK INFORMATION");
+        Text prompt = new Text("PATRON INFORMATION");
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-        Text bookIdLabel = new Text(" Book Id : ");
+        Text patronIdLabel = new Text(" Patron Id : ");
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        bookIdLabel.setFont(myFont);
-        bookIdLabel.setWrappingWidth(150);
-        bookIdLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bookIdLabel, 0, 1);
+        patronIdLabel.setFont(myFont);
+        patronIdLabel.setWrappingWidth(150);
+        patronIdLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(patronIdLabel, 0, 1);
 
-        bookId = new TextField();
-        bookId.setEditable(false);
-        grid.add(bookId, 1, 1);
+        patronId = new TextField();
+        patronId.setEditable(false);
+        grid.add(patronId, 1, 1);
 
-        Text bookTitleLabel = new Text(" Book Title : ");
-        bookTitleLabel.setFont(myFont);
-        bookTitleLabel.setWrappingWidth(150);
-        bookTitleLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bookTitleLabel, 0, 2);
+        Text addressLabel = new Text(" Address : ");
+        addressLabel.setFont(myFont);
+        addressLabel.setWrappingWidth(150);
+        addressLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(addressLabel, 0, 2);
 
-        bookTitle = new TextField();
-        bookTitle.setEditable(false);
-        grid.add(bookTitle, 1, 2);
+        address = new TextField();
+        address.setEditable(false);
+        grid.add(address, 1, 2);
 
-        Text authorLabel = new Text(" Author : ");
-        authorLabel.setFont(myFont);
-        authorLabel.setWrappingWidth(150);
-        authorLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(authorLabel, 0, 3);
+        Text cityLabel = new Text(" City : ");
+        cityLabel.setFont(myFont);
+        cityLabel.setWrappingWidth(150);
+        cityLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(cityLabel, 0, 3);
 
-        author = new TextField();
-        author.setEditable(false);
-        grid.add(author, 1, 3);
+        city = new TextField();
+        city.setEditable(false);
+        grid.add(city, 1, 3);
 
-        Text pubYearLabel = new Text(" Publication Year : ");
-        pubYearLabel.setFont(myFont);
-        pubYearLabel.setWrappingWidth(150);
-        pubYearLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(pubYearLabel, 0, 4);
+        Text dobLabel = new Text(" Date Of Birth : ");
+        dobLabel.setFont(myFont);
+        dobLabel.setWrappingWidth(150);
+        dobLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(dobLabel, 0, 4);
 
-        pubYear = new TextField();
-        pubYear.setEditable(false);
-        grid.add(pubYear, 1, 4);
+        dateOfBirth = new TextField();
+        dateOfBirth.setEditable(false);
+        grid.add(dateOfBirth, 1, 4);
+
+        Text emailLabel = new Text(" Email : ");
+        emailLabel.setFont(myFont);
+        emailLabel.setWrappingWidth(150);
+        emailLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(emailLabel, 0, 5);
+
+        email = new TextField();
+        email.setEditable(false);
+        grid.add(email, 1, 5);
+
+        Text nameLabel = new Text(" Name : ");
+        nameLabel.setFont(myFont);
+        nameLabel.setWrappingWidth(150);
+        nameLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(nameLabel, 0, 6);
+
+        name = new TextField();
+        name.setEditable(false);
+        grid.add(name, 1, 6);
+
+        Text stateCodeLabel = new Text(" State Code : ");
+        stateCodeLabel.setFont(myFont);
+        stateCodeLabel.setWrappingWidth(150);
+        stateCodeLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(stateCodeLabel, 0, 7);
+
+        stateCode = new TextField();
+        stateCode.setEditable(false);
+        grid.add(stateCode, 1, 7);
+
 
         Text statusLabel = new Text(" Status : ");
         statusLabel.setFont(myFont);
         statusLabel.setWrappingWidth(150);
         statusLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(statusLabel, 0, 5);
+        grid.add(statusLabel, 0, 8);
 
         status = new TextField();
         status.setEditable(false);
-        grid.add(status, 1, 5);
+        grid.add(status, 1, 8);
+
+        Text zipLabel = new Text(" Zip : ");
+        zipLabel.setFont(myFont);
+        zipLabel.setWrappingWidth(150);
+        zipLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(zipLabel, 0, 9);
+
+        zip = new TextField();
+        zip.setEditable(false);
+        grid.add(zip, 1, 9);
 
 
 
@@ -171,7 +216,7 @@ public class BookView extends View
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
-                myModel.stateChangeRequest("BookCancelled", null);
+                myModel.stateChangeRequest("PatronCancelled", null);
             }
         });
         doneCont.getChildren().add(cancelButton);
@@ -195,11 +240,15 @@ public class BookView extends View
     //-------------------------------------------------------------
     public void populateFields()
     {
-        bookId.setText((String)myModel.getState("bookId"));
-        bookTitle.setText((String)myModel.getState("bookTitle"));
-        author.setText((String)myModel.getState("author"));
-        pubYear.setText((String)myModel.getState("pubYear"));
+        patronId.setText((String)myModel.getState("patronId"));
+        address.setText((String)myModel.getState("address"));
+        city.setText((String)myModel.getState("city"));
+        dateOfBirth.setText((String)myModel.getState("dateOfBirth"));
+        email.setText((String)myModel.getState("email"));
+        name.setText((String)myModel.getState("name"));
+        stateCode.setText((String)myModel.getState("stateCode"));
         status.setText((String)myModel.getState("status"));
+        zip.setText((String)myModel.getState("zip"));
     }
 
     /**
