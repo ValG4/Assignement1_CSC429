@@ -16,7 +16,7 @@ public class PatronTableModel {
     private final SimpleStringProperty zip;
 
     //----------------------------------------------------------------------------
-    public AccountTableModel(Vector<String> accountData)
+    public PatronTableModel(Vector<String> accountData)
     {
         address =  new SimpleStringProperty(accountData.elementAt(0));
         city =  new SimpleStringProperty(accountData.elementAt(1));
