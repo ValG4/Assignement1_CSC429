@@ -42,7 +42,7 @@ public class TransactionChoiceView extends View
     private Button retrieveBookTitleButton;
     private Button retrieveBookYearButton;
     private Button retrievePatronDateButton;
-    private Button retrievePatronZipButton
+    private Button retrievePatronZipButton;
 
     private Button cancelButton;
 

@@ -19,9 +19,9 @@ public class ViewFactory {
         {
             return new BookCollectionView(model);
         }
-        else if(viewName.equals("AccountView") == true)
+        else if(viewName.equals("BookView") == true)
         {
-            return new AccountView(model);
+            return new BookView(model);
         }
         else if(viewName.equals("AccountHolderIDEntryView") == true)
         {

@@ -145,28 +145,33 @@ public class BookCollectionView extends View
         tableOfBooks = new TableView<BookTableModel>();
         tableOfBooks.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        TableColumn accountNumberColumn = new TableColumn("Account Number") ;
-        accountNumberColumn.setMinWidth(100);
-        accountNumberColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("accountNumber"));
+        TableColumn bookIdColumn = new TableColumn("Book Id") ;
+        bookIdColumn.setMinWidth(100);
+        bookIdColumn.setCellValueFactory(
+                new PropertyValueFactory<BookTableModel, String>("bookId"));
 
-        TableColumn accountTypeColumn = new TableColumn("Account Type") ;
-        accountTypeColumn.setMinWidth(100);
-        accountTypeColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("accountType"));
+        TableColumn authorColumn = new TableColumn("Author") ;
+        authorColumn.setMinWidth(100);
+        authorColumn.setCellValueFactory(
+                new PropertyValueFactory<BookTableModel, String>("author"));
 
-        TableColumn balanceColumn = new TableColumn("Balance") ;
-        balanceColumn.setMinWidth(100);
-        balanceColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("balance"));
+        TableColumn bookTitleColumn = new TableColumn("Book Title") ;
+        bookTitleColumn.setMinWidth(100);
+        bookTitleColumn.setCellValueFactory(
+                new PropertyValueFactory<BookTableModel, String>("bookTitle"));
 
-        TableColumn serviceChargeColumn = new TableColumn("Service Charge") ;
-        serviceChargeColumn.setMinWidth(100);
-        serviceChargeColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("serviceCharge"));
+        TableColumn pubYearColumn = new TableColumn("Publication Year") ;
+        pubYearColumn.setMinWidth(100);
+        pubYearColumn.setCellValueFactory(
+                new PropertyValueFactory<BookTableModel, String>("pubYear"));
 
-        tableOfBooks.getColumns().addAll(accountNumberColumn,
-                accountTypeColumn, balanceColumn, serviceChargeColumn);
+        TableColumn statusColumn = new TableColumn("Status") ;
+        statusColumn.setMinWidth(100);
+        statusColumn.setCellValueFactory(
+                new PropertyValueFactory<BookTableModel, String>("pubYear"));
+
+        tableOfBooks.getColumns().addAll(bookIdColumn,
+                authorColumn, bookTitleColumn, pubYearColumn, statusColumn);
 
         tableOfBooks.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
