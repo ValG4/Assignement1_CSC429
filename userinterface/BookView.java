@@ -9,10 +9,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,8 +20,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import java.util.Properties;
 
 import java.util.Properties;
+
+
+// project imports
+import impresario.IModel;
 
 // project imports
 import impresario.IModel;
@@ -38,7 +41,7 @@ public class BookView extends View
     protected TextField author;
     protected TextField pubYear;
     protected TextField bookTitle;
-    protected TextField status;
+    protected ComboBox<String> status;
 
     protected Button cancelButton;
 
@@ -154,7 +157,7 @@ public class BookView extends View
         statusLabel.setTextAlignment(TextAlignment.RIGHT);
         grid.add(statusLabel, 0, 5);
 
-        status = new TextField();
+        status = new ComboBox<String>();
         status.setEditable(false);
         grid.add(status, 1, 5);
 
@@ -193,13 +196,66 @@ public class BookView extends View
     }
 
     //-------------------------------------------------------------
+
+    public void processAction()
+    {
+        String title = bookTitle.getText().trim();
+        String authors = author.getText().trim();
+        String pubYears = pubYear.getText().trim();
+        String statusB = status.getValue();
+        Properties props = new Properties();
+
+        // Verify that the author field is not empty
+        if (authors.isEmpty()){
+            displayErrorMessage("Author field cannot be empty!");
+            author.requestFocus();
+            // Verify that the title field is not empty
+        } else if (title.isEmpty()) {
+            displayErrorMessage("Title field cannot be empty!");
+            bookTitle.requestFocus();
+        } else if (pubYears.isEmpty()) {
+            displayErrorMessage("Publishing year cannot be empty!");
+            pubYear.requestFocus();
+            // Verify that the publication year is within the range 1800 - 2024
+        } else if (Integer.parseInt(pubYears) < 1800 || Integer.parseInt(pubYears) > 2025){
+            displayErrorMessage("Publication year should be in between 1800 and 2024!");
+            pubYear.requestFocus();
+        } else {
+            props.setProperty("bookTitle", title);
+            props.setProperty("author", authors);
+            props.setProperty("pubYear", pubYears);
+            props.setProperty("status", statusB);
+
+            try {
+                myModel.stateChangeRequest("insertBook", props);
+                displayMessage("SUCCESS!");
+            }
+            catch(Exception ex)
+            {
+                displayErrorMessage("FAILED");
+                ex.printStackTrace();
+            }
+            // state request change with the data
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    //----------------------------------------------------------------
     public void populateFields()
     {
         bookId.setText((String)myModel.getState("bookId"));
         bookTitle.setText((String)myModel.getState("bookTitle"));
         author.setText((String)myModel.getState("author"));
         pubYear.setText((String)myModel.getState("pubYear"));
-        status.setText((String)myModel.getState("status"));
+        status.setValue((String)myModel.getState("status"));
     }
 
     /**
@@ -213,7 +269,7 @@ public class BookView extends View
         if (key.equals("Status") == true)
         {
             String val = (String)value;
-            status.setText(val);
+            status.setValue(val);
             displayMessage("Status Updated to:  " + val);
         }
     }
