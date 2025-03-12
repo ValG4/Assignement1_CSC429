@@ -32,6 +32,13 @@ public class BookSearchView extends View {
     public BookSearchView(IModel lib) {
         super(lib, "BookSearchView");
 
+        if (lib instanceof Librarian) {
+            myLibrarian = (Librarian) lib;
+        } else {
+            System.err.println("Error: Passed IModel is not a Librarian instance!");
+            myLibrarian = null;
+        }
+
         //myLibrarian = lib;
         // Create the container for showing our contents
         VBox container = new VBox(10);					//VBox with a spacing of 10
@@ -95,6 +102,7 @@ public class BookSearchView extends View {
             }
             else {
                 String title = bookTitle.getText();
+                //System.out.println(title);
                 myLibrarian.searchBooks(title);
             }
         });

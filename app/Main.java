@@ -3,6 +3,8 @@ import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
 import impresario.IModel;
 import model.*;
+
+import java.sql.SQLException;
 import java.util.*;
 
 import javafx.application.Application;
@@ -24,6 +26,21 @@ public class Main extends Application{
     private Stage mainStage;
 
     public void start(Stage primaryStage) {
+
+        JDBCBroker db = null;
+        try {
+            db = JDBCBroker.getInstance();
+            if (db == null) {
+                throw new NullPointerException("JDBCBroker instance is null.");
+            }
+            db.getConnection();
+        } catch (NullPointerException e) {
+            System.err.println("Error: JDBCBroker instance is null. " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         MainStageContainer.setStage(primaryStage, "Library System");
         mainStage = MainStageContainer.getInstance();

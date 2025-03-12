@@ -39,15 +39,18 @@ import java.util.Enumeration;
 import impresario.IModel;
 import model.Book;
 import model.BookCollection;
+import model.Librarian;
 
 //==============================================================================
 public class BookCollectionView extends View
 {
     protected TableView<BookTableModel> tableOfBooks;
     protected Button cancelButton;
-    protected Button submitButton;
 
     protected MessageView statusLog;
+
+    Librarian librarian = new Librarian();
+    BookCollectionView view;
 
 
     //--------------------------------------------------------------------------
@@ -69,6 +72,7 @@ public class BookCollectionView extends View
         getChildren().add(container);
 
         populateFields();
+        //view = new BookCollectionView(librarian);
     }
 
     //--------------------------------------------------------------------------
@@ -84,9 +88,9 @@ public class BookCollectionView extends View
         ObservableList<BookTableModel> tableData = FXCollections.observableArrayList();
         try
         {
-            BookCollection accountCollection = (BookCollection) myModel.getState("AccountList");
+            BookCollection accountCollection = (BookCollection) myModel.getState("BookList");
 
-            Vector entryList = (Vector)accountCollection.getState("Accounts");
+            Vector entryList = (Vector)accountCollection.getState("Books");
             Enumeration entries = entryList.elements();
 
             while (entries.hasMoreElements() == true)
@@ -186,17 +190,7 @@ public class BookCollectionView extends View
         scrollPane.setPrefSize(115, 150);
         scrollPane.setContent(tableOfBooks);
 
-        submitButton = new Button("Submit");
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-                // do the inquiry
-                processAccountSelected();
-
-            }
-        });
 
         cancelButton = new Button("Back");
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -213,12 +207,12 @@ public class BookCollectionView extends View
                 //----------------------------------------------------------
                 clearErrorMessage();
                 myModel.stateChangeRequest("CancelAccountList", null);
+                goToHomeView();
             }
         });
 
         HBox btnContainer = new HBox(100);
         btnContainer.setAlignment(Pos.CENTER);
-        btnContainer.getChildren().add(submitButton);
         btnContainer.getChildren().add(cancelButton);
 
         vbox.getChildren().add(grid);
@@ -274,6 +268,19 @@ public class BookCollectionView extends View
     {
         statusLog.clearErrorMessage();
     }
+
+    private void goToHomeView() {
+        // Create the Home (Librarian) view
+        LibrarianView homeView = new LibrarianView(myModel);  // Pass model or any required parameters
+
+        // Create the scene for the Home view
+        Scene homeScene = new Scene(homeView);  // Create a scene from the home view
+
+        // Get the Stage (window) and change the scene back to Home view
+        Stage stage = (Stage) getScene().getWindow();  // Get the current window's stage
+        stage.setScene(homeScene);  // Set the scene to Home (LibrarianView)
+    }
+
 	/*
 	//--------------------------------------------------------------------------
 	public void mouseClicked(MouseEvent click)

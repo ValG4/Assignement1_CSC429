@@ -5,22 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9d069b4-7cab-4f45-818a-e8fba3586965" name="Changes" comment="BookView update">
-      <change afterPath="$PROJECT_DIR$/userinterface/BookSearchView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userinterface/PatronSearchView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ErrorLog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ErrorLog.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/JDBCBroker.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/JDBCBroker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Book.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/BookCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/BookCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Librarian.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Librarian.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/Patron.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Patron.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/PatronCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/PatronCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/BookView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/BookView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/LibrarianView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/LibrarianView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/PatronView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/PatronView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/ViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/ViewFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinterface/view.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userinterface/BookCollectionView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/BookCollectionView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userinterface/BookSearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/userinterface/BookSearchView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
