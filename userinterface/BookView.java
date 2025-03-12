@@ -174,7 +174,7 @@ public class BookView extends View
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
-                myModel.stateChangeRequest("BookCancelled", null);
+                goToHomeView();
             }
         });
         doneCont.getChildren().add(cancelButton);
@@ -299,6 +299,18 @@ public class BookView extends View
     public void clearErrorMessage()
     {
         statusLog.clearErrorMessage();
+    }
+
+    private void goToHomeView() {
+        // Create the Home (Librarian) view
+        LibrarianView homeView = new LibrarianView(myModel);  // Pass model or any required parameters
+
+        // Create the scene for the Home view
+        Scene homeScene = new Scene(homeView);  // Create a scene from the home view
+
+        // Get the Stage (window) and change the scene back to Home view
+        Stage stage = (Stage) getScene().getWindow();  // Get the current window's stage
+        stage.setScene(homeScene);  // Set the scene to Home (LibrarianView)
     }
 
 }

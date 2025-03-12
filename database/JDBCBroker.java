@@ -43,13 +43,13 @@ public class JDBCBroker
 	private PropertyFile props = null;
 
 	// DB Access data
-	private String dbName = "spr25_csc429_vgoye1";
-	private String username = "vgoye1";
-	private String password = "_spr25_9";
-    private String server = "csdb.brockport.edu";
+	private static String dbName = "spr25_csc429_vgoye1";
+	private static String username = "vgoye1";
+	private static String password = "_spr25_9";
+    private static String server = "csdb.brockport.edu";
 	
 	private String dbClassNameVal = null;
-	private String dbInstallationNameVal = null;
+	private static String dbInstallationNameVal = null;
     
 	// singleton constructor
 	//----------------------------------------------------------
@@ -125,7 +125,7 @@ public class JDBCBroker
     
 	/** Create a connection to the database */
 	//-------------------------------------------------------- 
-	public Connection getConnection() 
+	public static Connection getConnection()
 	{	
 		//System.out.println("JDBCBroker.getConnection() with Driver " + theDriver);
 		if (myInstance != null)

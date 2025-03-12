@@ -9,6 +9,10 @@ import exception.InvalidPrimaryKeyException;
 import event.Event;
 import database.*; //all files from database package
 import impresario.IView;
+import javafx.stage.Stage;
+import userinterface.BookCollectionView;
+import userinterface.MainStageContainer;
+import userinterface.View;
 //import userinterface.View;
 //import userinterface.ViewFactory;
 
@@ -19,9 +23,36 @@ public class BookCollection extends EntityBase
 
     private Vector<Book> bookList; //create booklist
 
+    protected Librarian myLibrarian;
+    protected Stage myStage;
+    protected String bookTitle;
+
+    //----------------------------------------------------------
+    //Constructor for use with Librarian
+    //----------------------------------------------------------
+    public BookCollection(Librarian lib) {	//String title
+        super(myTableName);
+        myStage = MainStageContainer.getInstance();
+        myLibrarian = lib;
+        bookList = new Vector<Book>();
+    }
+
     public BookCollection() {
         super(myTableName); //saw this in account collection, looked important
         bookList = new Vector<Book>(); //constructor
+    }
+
+    public void createAndShowBookCollectionView() {
+
+        Scene currentScene = (Scene)myLibrarian.myViews.get("BookCollectionView");
+
+        if (currentScene == null) {
+
+            View newView = new BookCollectionView(this);
+            currentScene = new Scene(newView);
+            myLibrarian.myViews.put("BookCollectionView", currentScene);
+        }
+        myLibrarian.swapToView(currentScene);
     }
 
     public Vector<Book> findBooksOlderThanDate(String year) {

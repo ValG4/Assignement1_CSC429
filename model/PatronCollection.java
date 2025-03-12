@@ -9,6 +9,12 @@ import event.Event;
 import database.*;
 import exception.PasswordMismatchException;
 import impresario.IView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userinterface.BookCollectionView;
+import userinterface.MainStageContainer;
+import userinterface.PatronCollectionView;
+import userinterface.View;
 //import userinterface.View;
 //import userinterface.ViewFactory;
 
@@ -18,11 +24,20 @@ public class PatronCollection extends EntityBase
     private static final String myTableName = "Patron"; //establish database table name
 
     private Vector<Patron> patronList; //create booklist
+    protected Stage myStage;
+    protected Librarian myLibrarian;
 
     public PatronCollection() {
         super(myTableName);
         //super(myTableName); //saw this in account collection, looked important
         patronList = new Vector<Patron>(); //constructor
+    }
+
+    public PatronCollection(Librarian lib) {	//String title
+        super(myTableName);
+        myStage = MainStageContainer.getInstance();
+        myLibrarian = lib;
+        patronList = new Vector<Patron>();
     }
 
     public Vector<Patron> findPatronsOlderThanDate (String date) throws PasswordMismatchException, InvalidPrimaryKeyException {
@@ -90,6 +105,19 @@ public class PatronCollection extends EntityBase
             }
         }
         return patronList;
+    }
+
+    public void createAndShowPatronCollectionView() {
+
+        Scene currentScene = (Scene)myLibrarian.myViews.get("PatronCollectionView");
+
+        if (currentScene == null) {
+
+            View newView = new PatronCollectionView(this);
+            currentScene = new Scene(newView);
+            myLibrarian.myViews.put("PatronCollectionView", currentScene);
+        }
+        myLibrarian.swapToView(currentScene);
     }
 
     protected void initializeSchema(String table_name){

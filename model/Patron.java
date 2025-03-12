@@ -9,6 +9,10 @@ import java.sql.*;
 import database.*;
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userinterface.PatronView;
+import userinterface.View;
 
 public class Patron extends EntityBase{
     private static String table_name = "Patron";
@@ -16,6 +20,21 @@ public class Patron extends EntityBase{
     protected Properties persistentState;
     protected Properties dependencies;
     private String updateStatusMessage = "";
+
+    protected Librarian myLibrarian;
+    protected Stage myStage;
+
+
+    //----------------------------------------------------------
+    //Constructor used by librarian
+    //----------------------------------------------------------
+    public Patron(Librarian lib)
+    {
+        super(table_name);
+        myLibrarian = lib;
+        persistentState = new Properties();
+
+    }
 
     public Patron (String query_id) throws InvalidPrimaryKeyException, PasswordMismatchException {
         super(table_name);
@@ -47,6 +66,19 @@ public class Patron extends EntityBase{
             throw new InvalidPrimaryKeyException("More than one value associated with that key");
         }
 
+    }
+
+    public void createAndShowPatronView() {
+
+        Scene currentScene = (Scene)myLibrarian.myViews.get("PatronView");
+
+        if (currentScene == null) {
+
+            View newView = new PatronView(this);
+            currentScene = new Scene(newView);
+            myLibrarian.myViews.put("PatronView", currentScene);
+        }
+        myLibrarian.swapToView(currentScene);
     }
 
     public Patron(Properties props){

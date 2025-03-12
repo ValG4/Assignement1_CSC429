@@ -2,16 +2,37 @@ package model;
 
 import java.util.*;
 import java.sql.*;
+
+import com.sun.javafx.css.StyleCacheEntry;
 import database.*;
 
 import exception.InvalidPrimaryKeyException;
 import exception.PasswordMismatchException;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import userinterface.BookView;
+import userinterface.View;
+import userinterface.MainStageContainer;
+import model.Librarian;
 
 public class Book extends EntityBase{
     private static String table_name = "Book";
     protected Properties dependencies;
     protected Properties persistentState;
     private String updateStatusMessage = "";
+
+    protected Librarian myLibrarian;
+    protected Stage myStage;
+    //----------------------------------------------------------
+    //Constructor taking in new data to create a new Book
+    //----------------------------------------------------------
+    public Book(Librarian lib)
+    {
+        super(table_name);
+        persistentState = new Properties();
+        myStage = MainStageContainer.getInstance();
+        myLibrarian = lib;
+    }
 
     public Book (String query_id) throws InvalidPrimaryKeyException{
         super(table_name);
@@ -96,6 +117,19 @@ public class Book extends EntityBase{
         v.addElement(persistentState.getProperty("status"));
 
         return v;
+    }
+
+    public void createAndShowBookView() {
+
+        Scene currentScene = (Scene)myLibrarian.myViews.get("BookView");
+
+        if (currentScene == null) {
+
+            View newView = new BookView(this);
+            currentScene = new Scene(newView);
+            myLibrarian.myViews.put("BookView", currentScene);
+        }
+        myLibrarian.swapToView(currentScene);
     }
 
 

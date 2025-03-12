@@ -1,302 +1,176 @@
 package model;
 
-// system imports
-import java.util.Hashtable;
-import java.util.Properties;
-
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-
-// project imports
 import impresario.IModel;
-import impresario.ISlideShow;
 import impresario.IView;
-import impresario.ModelRegistry;
+
+import java.util.Hashtable;
 
 import exception.InvalidPrimaryKeyException;
-import exception.PasswordMismatchException;
-import event.Event;
-import userinterface.MainStageContainer;
-import userinterface.View;
-import userinterface.ViewFactory;
-import userinterface.WindowPosition;
+import userinterface.*;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Librarian implements IView, IModel{
 
-    private Properties dependencies;
-    private ModelRegistry myRegistry;
+/**
+ * Librarian - Main Interface Agent, called by our main program and creates an instance of LibrarianView
+ *
+ * Amanda Stevens & Ryan Tampone
+ * CSC 429 - Assignment 2
+ * Spring 2016
+ *
+ *
+ * 	Constructors:
+ *	Methods:
+ */
 
-    private AccountHolder myAccountHolder;
+public class Librarian implements IModel {
 
-    // GUI Components
-    private Hashtable<String, Scene> myViews;
-    private Stage	  	myStage;
+    //GUI Components
+    private Stage myStage;
+    Hashtable<String, Scene> myViews;
 
-    private String loginErrorMessage = "";
-    private String transactionErrorMessage = "";
 
-    // constructor for this class
     //----------------------------------------------------------
-    public Librarian()
-    {
+    //Constructor
+    //----------------------------------------------------------
+    public Librarian() {
         myStage = MainStageContainer.getInstance();
         myViews = new Hashtable<String, Scene>();
 
-        // STEP 3.1: Create the Registry object - if you inherit from
-        // EntityBase, this is done for you. Otherwise, you do it yourself
-        myRegistry = new ModelRegistry("Teller");
-        if(myRegistry == null)
-        {
-            new Event(Event.getLeafLevelClassName(this), "Teller",
-                    "Could not instantiate Registry", Event.ERROR);
-        }
 
-        // STEP 3.2: Be sure to set the dependencies correctly
-        setDependencies();
-
-        // Set up the initial view
-        createAndShowTellerView();
-    }
-
-    //-----------------------------------------------------------------------------------
-    private void setDependencies()
-    {
-        dependencies = new Properties();
-        dependencies.setProperty("Login", "LoginError");
-        dependencies.setProperty("Deposit", "TransactionError");
-        dependencies.setProperty("Withdraw", "TransactionError");
-        dependencies.setProperty("Transfer", "TransactionError");
-        dependencies.setProperty("BalanceInquiry", "TransactionError");
-        dependencies.setProperty("ImposeServiceCharge", "TransactionError");
-
-        myRegistry.setDependencies(dependencies);
-    }
-
-    /**
-     * Method called from client to get the value of a particular field
-     * held by the objects encapsulated by this object.
-     *
-     * @param	key	Name of database column (field) for which the client wants the value
-     *
-     * @return	Value associated with the field
-     */
-    //----------------------------------------------------------
-    public Object getState(String key)
-    {
-        if (key.equals("LoginError") == true)
-        {
-            return loginErrorMessage;
-        }
-        else
-        if (key.equals("TransactionError") == true)
-        {
-            return transactionErrorMessage;
-        }
-        else
-        if (key.equals("Name") == true)
-        {
-            if (myAccountHolder != null)
-            {
-                return myAccountHolder.getState("Name");
-            }
-            else
-                return "Undefined";
-        }
-        else
-            return "";
-    }
-
-    //----------------------------------------------------------------
-    public void stateChangeRequest(String key, Object value)
-    {
-        // STEP 4: Write the sCR method component for the key you
-        // just set up dependencies for
-        // DEBUG System.out.println("Teller.sCR: key = " + key);
-
-        if (key.equals("Login") == true)
-        {
-            if (value != null)
-            {
-                loginErrorMessage = "";
-
-                boolean flag = loginAccountHolder((Properties)value);
-                if (flag == true)
-                {
-                    createAndShowTransactionChoiceView();
-                }
-            }
-        }
-        else
-        if (key.equals("CancelTransaction") == true)
-        {
-            createAndShowTransactionChoiceView();
-        }
-        else
-        if ((key.equals("Deposit") == true) || (key.equals("Withdraw") == true) ||
-                (key.equals("Transfer") == true) || (key.equals("BalanceInquiry") == true) ||
-                (key.equals("ImposeServiceCharge") == true))
-        {
-            String transType = key;
-
-            if (myAccountHolder != null)
-            {
-                doTransaction(transType);
-            }
-            else
-            {
-                transactionErrorMessage = "Transaction impossible: Customer not identified";
-            }
-
-        }
-        else
-        if (key.equals("Logout") == true)
-        {
-            myAccountHolder = null;
-            myViews.remove("TransactionChoiceView");
-
-            createAndShowTellerView();
-        }
-
-        myRegistry.updateSubscribers(key, this);
-    }
-
-    /** Called via the IView relationship */
-    //----------------------------------------------------------
-    public void updateState(String key, Object value)
-    {
-        // DEBUG System.out.println("Teller.updateState: key: " + key);
-
-        stateChangeRequest(key, value);
-    }
-
-    /**
-     * Login AccountHolder corresponding to user name and password.
-     */
-    //----------------------------------------------------------
-    public boolean loginAccountHolder(Properties props)
-    {
-        try
-        {
-            myAccountHolder = new AccountHolder(props);
-            // DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
-            return true;
-        }
-        catch (InvalidPrimaryKeyException ex)
-        {
-            loginErrorMessage = "ERROR: " + ex.getMessage();
-            return false;
-        }
-        catch (PasswordMismatchException exec)
-        {
-
-            loginErrorMessage = "ERROR: " + exec.getMessage();
-            return false;
-        }
-    }
-
-
-    /**
-     * Create a Transaction depending on the Transaction type (deposit,
-     * withdraw, transfer, etc.). Use the AccountHolder holder data to do the
-     * create.
-     */
-    //----------------------------------------------------------
-    public void doTransaction(String transactionType)
-    {
-        try
-        {
-            Transaction trans = TransactionFactory.createTransaction(
-                    transactionType, myAccountHolder);
-
-            trans.subscribe("CancelTransaction", this);
-            trans.stateChangeRequest("DoYourJob", "");
-        }
-        catch (Exception ex)
-        {
-            transactionErrorMessage = "FATAL ERROR: TRANSACTION FAILURE: Unrecognized transaction!!";
-            new Event(Event.getLeafLevelClassName(this), "createTransaction",
-                    "Transaction Creation Failure: Unrecognized transaction " + ex.toString(),
-                    Event.ERROR);
-        }
+        createAndShowLibrarianView();
+        //createAndShowBookView();	//Comment and uncomment to test the various views
     }
 
     //----------------------------------------------------------
-    private void createAndShowTransactionChoiceView()
-    {
-        Scene currentScene = (Scene)myViews.get("TransactionChoiceView");
+    //Method called by constructor, creates/shows LibrarianView
+    //----------------------------------------------------------
+    private void createAndShowLibrarianView() {
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("TransactionChoiceView", this); // USE VIEW FACTORY
+        Scene currentScene = (Scene)myViews.get("LibrarianView");
+
+        if (currentScene == null) {
+
+            //Create our initial view
+
+            View newView = new LibrarianView(this);
+
             currentScene = new Scene(newView);
-            myViews.put("TransactionChoiceView", currentScene);
+            myViews.put("LibrarianView", currentScene);
         }
-
-
-        // make the view visible by installing it into the frame
         swapToView(currentScene);
-
     }
 
-    //------------------------------------------------------------
-    private void createAndShowTellerView()
-    {
-        Scene currentScene = (Scene)myViews.get("TellerView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("TellerView", this); // USE VIEW FACTORY
+    //----------------------------------------------------------
+    //Creates/show BookSearchView
+    //----------------------------------------------------------
+    private void createAndShowBookSearchView() {
+
+        Scene currentScene = (Scene)myViews.get("BookSearchView");
+
+        if (currentScene == null) {
+            View newView = new BookSearchView(this);
             currentScene = new Scene(newView);
-            myViews.put("TellerView", currentScene);
+            myViews.put("BookSearchView", currentScene);
         }
-
         swapToView(currentScene);
-
     }
 
 
-    /** Register objects to receive state updates. */
+
     //----------------------------------------------------------
-    public void subscribe(String key, IView subscriber)
-    {
-        // DEBUG: System.out.println("Cager[" + myTableName + "].subscribe");
-        // forward to our registry
-        myRegistry.subscribe(key, subscriber);
-    }
-
-    /** Unregister previously registered objects. */
+    //Create new book - Called when "Insert new book" is clicked in LibrarianView
     //----------------------------------------------------------
-    public void unSubscribe(String key, IView subscriber)
-    {
-        // DEBUG: System.out.println("Cager.unSubscribe");
-        // forward to our registry
-        myRegistry.unSubscribe(key, subscriber);
+    public void createNewBook() {
+        Book b = new Book(this);
+        b.createAndShowBookView();
+    }
+
+    //----------------------------------------------------------
+    //Return to LibrarianView from the BookSearchView
+    //----------------------------------------------------------
+    public void back() {
+        Book b = new Book(this);
+        createAndShowLibrarianView();
+    }
+
+    //----------------------------------------------------------
+    //Create new patron - Called when "Insert new patron" is clicked in LibrarianView
+    //----------------------------------------------------------
+    public void createNewPatron() {
+        Patron p = new Patron(this);
+        p.createAndShowPatronView();
+    }
+
+    //----------------------------------------------------------
+    //Search Books - Called when "Search Books" is clicked in LibrarianView
+    //----------------------------------------------------------
+    public void titleSearch() {
+        createAndShowBookSearchView();
+    }
+
+    //----------------------------------------------------------
+    //Search Books - Called when "Submit" is clicked in BookSearchView
+    //----------------------------------------------------------
+    public void searchBooks(String bookTitle) {
+        BookCollection bc = new BookCollection(this);
+
+        bc.findBooksWithTitleLike(bookTitle);
+
+        bc.createAndShowBookCollectionView();
+    }
+
+    public void searchPatrons(String zip){
+        PatronCollection pc = new PatronCollection(this);
+        pc.findPatronsAtZipCode(zip);
+        pc.createAndShowPatronCollectionView();
+    }
+    //----------------------------------------------------------
+    //Called when user is finished - closes the program
+    //----------------------------------------------------------
+    public void closeProgram() {
+        Platform.exit();
     }
 
 
+    //----------------------------------------------------------
+    //Changes our View - Called by previous method
+    //----------------------------------------------------------
+    public void swapToView(Scene newScene) {
 
-    //-----------------------------------------------------------------------------
-    public void swapToView(Scene newScene)
-    {
-
-
-        if (newScene == null)
-        {
-            System.out.println("Teller.swapToView(): Missing view for display");
-            new Event(Event.getLeafLevelClassName(this), "swapToView",
-                    "Missing view for display ", Event.ERROR);
-            return;
+        if (newScene == null) {
+            System.out.println("Librarian.swapToView(): Missing view for display");
         }
 
         myStage.setScene(newScene);
         myStage.sizeToScene();
 
-
-        //Place in center
+        //Center our window
         WindowPosition.placeCenter(myStage);
-
     }
+
+    //----------------------------------------------------------
+    //Method Called by Book/Patron to return to LibrarianView
+    //----------------------------------------------------------
+    public void transactionDone() {
+        createAndShowLibrarianView();
+    }
+
+
+    //----------------------------------------------------------
+    //Abstract Methods inherited from IView - Leave Blank
+    //----------------------------------------------------------
+    public Object getState(String arg0) {
+        return null;
+    }
+    public void stateChangeRequest(String arg0, Object arg1) {
+    }
+    public void subscribe(String arg0, IView arg1) {
+    }
+    public void unSubscribe(String arg0, IView arg1) {
+    }
+
 
 }
