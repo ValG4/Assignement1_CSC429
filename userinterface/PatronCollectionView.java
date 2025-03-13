@@ -86,9 +86,9 @@ public class PatronCollectionView extends View
         ObservableList<PatronTableModel> tableData = FXCollections.observableArrayList();
         try
         {
-            PatronCollection accountCollection = (PatronCollection) myModel.getState("PatronList");
+            PatronCollection accountCollection = (PatronCollection) myModel.getState("PatronId");
 
-            Vector entryList = (Vector)accountCollection.getState("Patron");
+            Vector entryList = (Vector)accountCollection.getState("Patrons");
             Enumeration entries = entryList.elements();
 
             while (entries.hasMoreElements() == true)
@@ -212,18 +212,6 @@ public class PatronCollectionView extends View
         scrollPane.setPrefSize(115, 150);
         scrollPane.setContent(tableOfPatrons);
 
-        submitButton = new Button("Submit");
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-                // do the inquiry
-                processAccountSelected();
-
-            }
-        });
-
         cancelButton = new Button("Back");
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -239,12 +227,12 @@ public class PatronCollectionView extends View
                 //----------------------------------------------------------
                 clearErrorMessage();
                 myModel.stateChangeRequest("CancelAccountList", null);
+                goToHomeView();
             }
         });
 
         HBox btnContainer = new HBox(100);
         btnContainer.setAlignment(Pos.CENTER);
-        btnContainer.getChildren().add(submitButton);
         btnContainer.getChildren().add(cancelButton);
 
         vbox.getChildren().add(grid);
@@ -300,6 +288,19 @@ public class PatronCollectionView extends View
     {
         statusLog.clearErrorMessage();
     }
+
+    private void goToHomeView() {
+        // Create the Home (Librarian) view
+        LibrarianView homeView = new LibrarianView(myModel);  // Pass model or any required parameters
+
+        // Create the scene for the Home view
+        Scene homeScene = new Scene(homeView);  // Create a scene from the home view
+
+        // Get the Stage (window) and change the scene back to Home view
+        Stage stage = (Stage) getScene().getWindow();  // Get the current window's stage
+        stage.setScene(homeScene);  // Set the scene to Home (LibrarianView)
+    }
+
 	/*
 	//--------------------------------------------------------------------------
 	public void mouseClicked(MouseEvent click)
