@@ -12,17 +12,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-/**
- * Librarian - Main Interface Agent, called by our main program and creates an instance of LibrarianView
- *
- * Amanda Stevens & Ryan Tampone
- * CSC 429 - Assignment 2
- * Spring 2016
- *
- *
- * 	Constructors:
- *	Methods:
- */
 
 public class Librarian implements IModel {
 
@@ -86,6 +75,8 @@ public class Librarian implements IModel {
     public void createNewBook() {
         Book b = new Book(this);
         b.createAndShowBookView();
+
+
     }
 
     //----------------------------------------------------------
@@ -166,6 +157,7 @@ public class Librarian implements IModel {
         return null;
     }
     public void stateChangeRequest(String arg0, Object arg1) {
+
     }
     public void subscribe(String arg0, IView arg1) {
     }

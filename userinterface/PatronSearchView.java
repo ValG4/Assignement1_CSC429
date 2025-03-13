@@ -55,7 +55,7 @@ public class PatronSearchView extends View {
         container.setAlignment(Pos.CENTER);
 
         //Change below if desired
-        Text titleText = new Text("SEARCH PATRONS");
+        Text titleText = new Text("SEARCH PATRONS/PatronSearchView");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 25));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);

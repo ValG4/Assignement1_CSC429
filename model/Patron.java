@@ -169,7 +169,30 @@ public class Patron extends EntityBase{
         }
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
     }
+    public void processNewPatron(Properties p) {
+        // Set the patron data from the Properties object into the persistentState
+        persistentState = new Properties();
+        persistentState.setProperty("name", p.getProperty("name"));
+        persistentState.setProperty("address", p.getProperty("address"));
+        persistentState.setProperty("city", p.getProperty("city"));
+        persistentState.setProperty("stateCode", p.getProperty("stateCode"));
+        persistentState.setProperty("zip", p.getProperty("zip"));
+        persistentState.setProperty("email", p.getProperty("email"));
+        persistentState.setProperty("dateOfBirth", p.getProperty("dateOfBirth"));
 
+        // Now that the patron data is set, insert the patron into the database
+        try {
+            // Call the method to update the database (could be insert or update depending on your logic)
+            updateStateInDatabase(); // Assuming updateStateInDatabase() is the method to handle the DB insertion/updating
+
+            // If successful, display a success message
+            System.out.println("Patron successfully added to the database!");
+        } catch (Exception ex) {
+            // If an error occurs during database insertion, display an error message
+            System.out.println("Failed to add patron to the database.");
+            ex.printStackTrace();
+        }
+    }
     protected void initializeSchema(String table_name){
         if(mySchema == null){
             mySchema = getSchemaInfo(table_name);

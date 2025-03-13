@@ -14,6 +14,7 @@ import userinterface.BookView;
 import userinterface.View;
 import userinterface.MainStageContainer;
 import model.Librarian;
+import userinterface.*;
 
 public class Book extends EntityBase{
     private static String table_name = "Book";
@@ -78,6 +79,28 @@ public class Book extends EntityBase{
             if(nextValue != null){
                 persistentState.setProperty(nextKey, nextValue);
             }
+        }
+    }
+
+    public void processNewBook(Properties p) {
+        // Set the book data from the Properties object into the persistentState
+        persistentState = new Properties();
+        persistentState.setProperty("bookTitle", p.getProperty("bookTitle"));
+        persistentState.setProperty("author", p.getProperty("author"));
+        persistentState.setProperty("pubYear", p.getProperty("pubYear"));
+        persistentState.setProperty("status", p.getProperty("status"));
+
+        // Now that the book data is set, insert the book into the database
+        try {
+            // Call the method to update the database
+            updateStateInDatabase();
+
+            // If successful, display a success message
+            System.out.println("Book successfully added to the database!");
+        } catch (Exception ex) {
+            // If an error occurs during database insertion, display an error message
+            System.out.println("Failed to add book to the database.");
+            ex.printStackTrace();
         }
     }
 

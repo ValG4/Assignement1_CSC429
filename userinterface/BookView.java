@@ -21,8 +21,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.util.Properties;
-
-import java.util.Properties;
+import model.*;
 
 
 // project imports
@@ -37,13 +36,18 @@ public class BookView extends View
 {
 
     // GUI components
-    protected TextField bookId;
+    // protected TextField bookId;
     protected TextField author;
     protected TextField pubYear;
     protected TextField bookTitle;
+
     protected ComboBox<String> status;
 
+
+
     protected Button cancelButton;
+    protected Button submitButton;
+
 
     // For showing error message
     protected MessageView statusLog;
@@ -82,7 +86,7 @@ public class BookView extends View
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
 
-        Text titleText = new Text(" Brockport Library ");
+        Text titleText = new Text(" Brockport Library //bookview");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -104,22 +108,22 @@ public class BookView extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
+        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
         Text prompt = new Text("BOOK INFORMATION");
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-        Text bookIdLabel = new Text(" Book Id : ");
-        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        bookIdLabel.setFont(myFont);
-        bookIdLabel.setWrappingWidth(150);
-        bookIdLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bookIdLabel, 0, 1);
-
-        bookId = new TextField();
-        bookId.setEditable(false);
-        grid.add(bookId, 1, 1);
+//        Text bookIdLabel = new Text(" Book Id : ");
+//        bookIdLabel.setFont(myFont);
+//        bookIdLabel.setWrappingWidth(150);
+//        bookIdLabel.setTextAlignment(TextAlignment.RIGHT);
+//        grid.add(bookIdLabel, 0, 1);
+//
+//        bookId = new TextField();
+//        bookId.setEditable(false);
+//        grid.add(bookId, 1, 1);
 
         Text bookTitleLabel = new Text(" Book Title : ");
         bookTitleLabel.setFont(myFont);
@@ -128,7 +132,7 @@ public class BookView extends View
         grid.add(bookTitleLabel, 0, 2);
 
         bookTitle = new TextField();
-        bookTitle.setEditable(false);
+        bookTitle.setEditable(true);
         grid.add(bookTitle, 1, 2);
 
         Text authorLabel = new Text(" Author : ");
@@ -138,7 +142,7 @@ public class BookView extends View
         grid.add(authorLabel, 0, 3);
 
         author = new TextField();
-        author.setEditable(false);
+        author.setEditable(true);
         grid.add(author, 1, 3);
 
         Text pubYearLabel = new Text(" Publication Year : ");
@@ -148,25 +152,35 @@ public class BookView extends View
         grid.add(pubYearLabel, 0, 4);
 
         pubYear = new TextField();
-        pubYear.setEditable(false);
+        pubYear.setEditable(true);
         grid.add(pubYear, 1, 4);
+
+
 
         Text statusLabel = new Text(" Status : ");
         statusLabel.setFont(myFont);
         statusLabel.setWrappingWidth(150);
         statusLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(statusLabel, 0, 5);
-
         status = new ComboBox<String>();
+        status.getItems().addAll("Available", "Checked Out");  // Add the status options
+        status.setValue("Available");  // Set the default value to "Active"
         status.setEditable(false);
+
+        grid.add(statusLabel, 0, 5);
         grid.add(status, 1, 5);
 
 
 
 
 
+
+
+
+
+
+
         HBox doneCont = new HBox(10);
-        doneCont.setAlignment(Pos.CENTER);
+        doneCont.setAlignment(Pos.CENTER_RIGHT);
         cancelButton = new Button("Back");
         cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -181,6 +195,22 @@ public class BookView extends View
 
         vbox.getChildren().add(grid);
         vbox.getChildren().add(doneCont);
+
+        HBox subCont = new HBox(10);
+        subCont.setAlignment(Pos.CENTER_LEFT);
+        submitButton = new Button("Submit");
+        submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                clearErrorMessage();
+                processAction();
+            }
+        });
+        subCont.getChildren().add(submitButton);
+        vbox.getChildren().add(subCont);
+
 
         return vbox;
     }
@@ -227,8 +257,10 @@ public class BookView extends View
             props.setProperty("status", statusB);
 
             try {
-                myModel.stateChangeRequest("insertBook", props);
+                myModel.stateChangeRequest("book id", props);
                 displayMessage("SUCCESS!");
+                Book temp = new Book(props);
+                temp.processNewBook(props);
             }
             catch(Exception ex)
             {
@@ -240,7 +272,13 @@ public class BookView extends View
     }
 
 
-
+//
+//    private void processAmount(String amount)
+//    {
+//        Properties props = new Properties();
+//        props.setProperty("Amount", amount);
+//        myModel.stateChangeRequest("Amount", props);
+//    }
 
 
 
@@ -251,11 +289,11 @@ public class BookView extends View
     //----------------------------------------------------------------
     public void populateFields()
     {
-        bookId.setText((String)myModel.getState("bookId"));
+        //bookId.setText((String)myModel.getState("bookId"));
         bookTitle.setText((String)myModel.getState("bookTitle"));
         author.setText((String)myModel.getState("author"));
         pubYear.setText((String)myModel.getState("pubYear"));
-        status.setValue((String)myModel.getState("status"));
+        //status.setValue((String)myModel.getState("status"));
     }
 
     /**

@@ -14,10 +14,10 @@ public class BookTableModel {
     //----------------------------------------------------------------------------
     public BookTableModel(Vector<String> accountData)
     {
-        BookId =  new SimpleStringProperty(accountData.elementAt(1));
+        BookId =  new SimpleStringProperty(accountData.elementAt(0));
         pubYear =  new SimpleStringProperty(accountData.elementAt(3));
-        author =  new SimpleStringProperty(accountData.elementAt(0));
-        BookTitle =  new SimpleStringProperty(accountData.elementAt(2));
+        author =  new SimpleStringProperty(accountData.elementAt(2));
+        BookTitle =  new SimpleStringProperty(accountData.elementAt(1));
         status = new SimpleStringProperty(accountData.elementAt(4));
     }
 

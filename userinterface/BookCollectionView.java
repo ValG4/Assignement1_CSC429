@@ -56,7 +56,7 @@ public class BookCollectionView extends View
     //--------------------------------------------------------------------------
     public BookCollectionView(IModel wsc)
     {
-        super(wsc, "AccountCollectionView");
+        super(wsc, "BookCollectionView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -118,7 +118,7 @@ public class BookCollectionView extends View
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
 
-        Text titleText = new Text(" Brockport Library ");
+        Text titleText = new Text(" Brockport Library/BookCollectionView ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -149,20 +149,20 @@ public class BookCollectionView extends View
         tableOfBooks = new TableView<BookTableModel>();
         tableOfBooks.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        TableColumn bookIdColumn = new TableColumn("Book Id") ;
+        TableColumn bookIdColumn = new TableColumn("Book Id") ; //MAY HAVE TO REIMPLEMENT THIS
         bookIdColumn.setMinWidth(100);
-        bookIdColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("bookId"));
+        bookIdColumn.setCellValueFactory(new PropertyValueFactory<BookTableModel, String>("bookId"));
 
-        TableColumn authorColumn = new TableColumn("Author") ;
-        authorColumn.setMinWidth(100);
-        authorColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("author"));
 
         TableColumn bookTitleColumn = new TableColumn("Book Title") ;
         bookTitleColumn.setMinWidth(100);
         bookTitleColumn.setCellValueFactory(
                 new PropertyValueFactory<BookTableModel, String>("bookTitle"));
+
+        TableColumn authorColumn = new TableColumn("Author") ;
+        authorColumn.setMinWidth(100);
+        authorColumn.setCellValueFactory(
+                new PropertyValueFactory<BookTableModel, String>("author"));
 
         TableColumn pubYearColumn = new TableColumn("Publication Year") ;
         pubYearColumn.setMinWidth(100);
@@ -172,10 +172,9 @@ public class BookCollectionView extends View
         TableColumn statusColumn = new TableColumn("Status") ;
         statusColumn.setMinWidth(100);
         statusColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("pubYear"));
+                new PropertyValueFactory<BookTableModel, String>("status"));
 
-        tableOfBooks.getColumns().addAll(bookIdColumn,
-                authorColumn, bookTitleColumn, pubYearColumn, statusColumn);
+        tableOfBooks.getColumns().addAll(bookIdColumn, bookTitleColumn, authorColumn, pubYearColumn, statusColumn);
 
         tableOfBooks.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

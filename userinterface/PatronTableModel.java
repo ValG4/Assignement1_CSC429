@@ -18,12 +18,12 @@ public class PatronTableModel {
     //----------------------------------------------------------------------------
     public PatronTableModel(Vector<String> accountData)
     {
-        address =  new SimpleStringProperty(accountData.elementAt(0));
-        city =  new SimpleStringProperty(accountData.elementAt(1));
-        dateOfBirth =  new SimpleStringProperty(accountData.elementAt(2));
-        email =  new SimpleStringProperty(accountData.elementAt(3));
-        name = new SimpleStringProperty(accountData.elementAt(4));
-        patronId = new SimpleStringProperty(accountData.elementAt(5));
+        address =  new SimpleStringProperty(accountData.elementAt(1));
+        city =  new SimpleStringProperty(accountData.elementAt(2));
+        dateOfBirth =  new SimpleStringProperty(accountData.elementAt(3));
+        email =  new SimpleStringProperty(accountData.elementAt(4));
+        name = new SimpleStringProperty(accountData.elementAt(5));
+        patronId = new SimpleStringProperty(accountData.elementAt(0));
         stateCode = new SimpleStringProperty(accountData.elementAt(6));
         status = new SimpleStringProperty(accountData.elementAt(7));
         zip = new SimpleStringProperty(accountData.elementAt(8));

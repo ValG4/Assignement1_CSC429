@@ -137,9 +137,9 @@ public class JDBCBroker
 					try
 					{
 						// Create a connection to the database
-						theDBConnection = theDriver.connect("jdbc:" + dbInstallationNameVal +"://"+server+":3306/" + 
+						theDBConnection = theDriver.connect("jdbc:" + dbInstallationNameVal +"://"+server+":3306/" +
 							dbName + "?" + "user=" + username + "&password=" +
-							password, null);					
+							password, null);
 					}
 					catch(SQLException exc)
 					{

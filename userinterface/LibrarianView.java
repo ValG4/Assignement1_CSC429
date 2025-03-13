@@ -81,7 +81,7 @@ public class LibrarianView extends View
     private VBox createTitle()
     {
         VBox container = new VBox(10);
-        Text titleText = new Text("       Brockport Library          ");
+        Text titleText = new Text("       Brockport Library /LibrarianView         ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);

@@ -62,7 +62,7 @@ public class BookSearchView extends View {
         container.setAlignment(Pos.CENTER);
 
         //Change below if desired
-        Text titleText = new Text("SEARCH BOOKS");
+        Text titleText = new Text("SEARCH BOOKS/BooKSearchView");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 25));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);

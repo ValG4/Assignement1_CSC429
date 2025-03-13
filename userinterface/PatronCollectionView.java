@@ -116,7 +116,7 @@ public class PatronCollectionView extends View
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
 
-        Text titleText = new Text(" Brockport Library ");
+        Text titleText = new Text(" Brockport Library/PatronCollectionView ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -147,10 +147,14 @@ public class PatronCollectionView extends View
         tableOfPatrons = new TableView<PatronTableModel>();
         tableOfPatrons.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        TableColumn patronIdColumn = new TableColumn("Patron Id") ;
+//        TableColumn patronIdColumn = new TableColumn("Patron Id") ;
+//        patronIdColumn.setMinWidth(100);
+//        patronIdColumn.setCellValueFactory(
+//                new PropertyValueFactory<BookTableModel, String>("patronId"));
+
+        TableColumn<PatronTableModel, Integer> patronIdColumn = new TableColumn<>("Patron Id");
         patronIdColumn.setMinWidth(100);
-        patronIdColumn.setCellValueFactory(
-                new PropertyValueFactory<BookTableModel, String>("patronId"));
+        patronIdColumn.setCellValueFactory(new PropertyValueFactory<PatronTableModel, Integer>("patronId"));
 
         TableColumn addressColumn = new TableColumn("Address") ;
         addressColumn.setMinWidth(100);
