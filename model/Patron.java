@@ -126,7 +126,7 @@ public class Patron extends EntityBase{
     {
         Vector<String> v = new Vector<String>();
 
-        v.addElement(persistentState.getProperty("PatronId"));
+        v.addElement(persistentState.getProperty("patronId"));
         v.addElement(persistentState.getProperty("address"));
         v.addElement(persistentState.getProperty("city"));
         v.addElement(persistentState.getProperty("dateOfBirth"));

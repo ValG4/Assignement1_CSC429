@@ -193,8 +193,8 @@ public class PatronView extends View
         statusLabel.setWrappingWidth(150);
         statusLabel.setTextAlignment(TextAlignment.RIGHT);
         status = new ComboBox<String>();
-        status.getItems().addAll("Available", "Checked Out");  // Add the status options
-        status.setValue("Available");  // Set the default value to "Active"
+        status.getItems().addAll("Active", "Inactive");  // Add the status options
+        status.setValue("Active");  // Set the default value to "Active"
         status.setEditable(false);
 
         grid.add(statusLabel, 0, 8);
@@ -332,8 +332,8 @@ public class PatronView extends View
         stateCode.setText((String)myModel.getState("stateCode"));
         zip.setText((String)myModel.getState("zip"));
         email.setText((String)myModel.getState("email"));
-        status.setValue("Available");  // Set the default value to "Active"
-        status.setValue((String)myModel.getState("status"));
+        status.setValue("Active");  // Set the default value to "Active"
+        //status.setValue((String)myModel.getState("status"));
         dateOfBirth.setText((String)myModel.getState("dateOfBirth"));
     }
 

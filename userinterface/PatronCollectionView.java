@@ -37,10 +37,7 @@ import java.util.Enumeration;
 
 // project imports
 import impresario.IModel;
-import model.Book;
-import model.BookCollection;
-import model.Patron;
-import model.PatronCollection;
+import model.*;
 
 //==============================================================================
 public class PatronCollectionView extends View
@@ -48,6 +45,7 @@ public class PatronCollectionView extends View
     protected TableView<PatronTableModel> tableOfPatrons;
     protected Button cancelButton;
     protected Button submitButton;
+    private Librarian theLibrarian;
 
     protected MessageView statusLog;
 
@@ -227,7 +225,8 @@ public class PatronCollectionView extends View
                 //----------------------------------------------------------
                 clearErrorMessage();
                 myModel.stateChangeRequest("CancelAccountList", null);
-                goToHomeView();
+                theLibrarian = new Librarian();
+                //goToHomeView();
             }
         });
 

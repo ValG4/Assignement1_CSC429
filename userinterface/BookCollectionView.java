@@ -46,6 +46,7 @@ public class BookCollectionView extends View
 {
     protected TableView<BookTableModel> tableOfBooks;
     protected Button cancelButton;
+    private Librarian theLibrarian;
 
     protected MessageView statusLog;
 
@@ -206,7 +207,8 @@ public class BookCollectionView extends View
                 //----------------------------------------------------------
                 clearErrorMessage();
                 myModel.stateChangeRequest("CancelAccountList", null);
-                goToHomeView();
+                theLibrarian = new Librarian();
+                //goToHomeView();
             }
         });
 
