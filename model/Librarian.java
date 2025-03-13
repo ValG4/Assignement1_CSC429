@@ -115,7 +115,9 @@ public class Librarian implements IModel {
 
     public void searchPatrons(String zip){
         PatronCollection pc = new PatronCollection(this);
+
         pc.findPatronsAtZipCode(zip);
+
         pc.createAndShowPatronCollectionView();
     }
     //----------------------------------------------------------

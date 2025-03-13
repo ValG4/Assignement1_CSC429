@@ -2,6 +2,7 @@ package userinterface;
 
 import java.util.Vector;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class BookTableModel {
@@ -14,6 +15,7 @@ public class BookTableModel {
     //----------------------------------------------------------------------------
     public BookTableModel(Vector<String> accountData)
     {
+
         BookId =  new SimpleStringProperty(accountData.elementAt(0));
         pubYear =  new SimpleStringProperty(accountData.elementAt(3));
         author =  new SimpleStringProperty(accountData.elementAt(2));
